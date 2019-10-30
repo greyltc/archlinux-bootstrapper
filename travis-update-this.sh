@@ -9,7 +9,7 @@ git config user.name "Travis CI"
 git config user.email "travis@rob.ot"
 
 git add wsl-build.log
-git add nstall.tar.gz
+git add install.tar.gz
 
 chmod 600 travis_key
 eval `ssh-agent -s`
