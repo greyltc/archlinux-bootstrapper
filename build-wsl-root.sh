@@ -29,7 +29,7 @@ EOF
 
 chmod +x rootmount/root.x86_64/usr/bin/fs-setup.sh
 
-fakechroot fakeroot arch-chroot rootmount/root.x86_64 fs-setup.sh
+fakeroot fakechroot arch-chroot rootmount/root.x86_64 fs-setup.sh
 
 #exit
 unmount rootmount
