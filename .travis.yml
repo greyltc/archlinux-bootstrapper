@@ -6,6 +6,7 @@ before_install:
 - sudo apt-get -qq update
 - sudo apt-get install -y arch-install-scripts
 script:
+- dpkg-query -L arch-install-scripts
 - cd $TRAVIS_BUILD_DIR
 - git checkout master
 - bash ./travis-update-this.sh
