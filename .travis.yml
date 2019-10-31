@@ -7,5 +7,5 @@ before_install:
 - sudo apt-get install -y arch-install-scripts
 script:
 - cd $TRAVIS_BUILD_DIR
-- git checkout master
+- GIT_LFS_SKIP_SMUDGE=1 git checkout master
 - bash ./travis-update-this.sh
