@@ -19,7 +19,7 @@ gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --wit
 gpg --no-default-keyring --keyring ./vendors.gpg --verify *.sig
 rm vendors.gpg* *.sig
 
-tar xzf archlinux-bootstrap-*-x86_64.tar.gz
+sudo tar xzf archlinux-bootstrap-*-x86_64.tar.gz
 
 cat <<EOF > /tmp/setup-tasks.sh
 touch poop
