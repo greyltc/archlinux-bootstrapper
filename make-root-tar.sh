@@ -37,4 +37,4 @@ popd
 
 mv /tmp/rootwork/root.tar.gz .
 
-rm -rf /tmp/rootwork
+sudo rm -rf /tmp/rootwork
