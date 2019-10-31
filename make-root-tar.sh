@@ -34,7 +34,9 @@ fetch_root() {
   cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* .
 
   # verify .sig
-  gpg --trust-model always --verify *.sig
+  gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
+  gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons | sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p' | gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
+  gpg --trust-model always --no-default-keyring --keyring ./vendors.gpg --verify *.sig
   rm *.sig
 
   sudo tar xzf archlinux-bootstrap-*-x86_64.tar.gz
