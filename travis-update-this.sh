@@ -12,7 +12,8 @@ git config user.email "travis@rob.ot"
 ./make-root-tar.sh |& tee root-build.log
 
 git add root-build.log
-git add root.tar.gz
+#git add root.tar.gz
+curl -F file=@root.tar.gz -F expires=2w -F no_index=true https://api.anonymousfiles.io/
 
 chmod 600 travis_key
 eval `ssh-agent -s`
