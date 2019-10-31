@@ -9,7 +9,7 @@ set -o xtrace
 #set -e -u -o pipefail
 
 wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-#ln -s mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* .
+cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* .
 
 # verify .sig
 gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
@@ -36,3 +36,5 @@ rm mnt/usr/bin/fs-setup.sh
 
 sudo umount mnt
 rm -rf mnt
+
+mv archlinux-bootstrap-*.tar.gz install.tar.gz
