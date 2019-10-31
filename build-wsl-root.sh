@@ -23,14 +23,17 @@ mv archlinux-bootstrap-* install.tar.gz
 sudo tar xzf install.tar.gz
 rm install.tar.gz
 
-sudo cat <<EOF > root.x86_64/usr/bin/fs-setup.sh
+cat <<EOF > /tmp/fs-setup.sh
 touch /poop
 echo "poop touched!"
 EOF
+chmod +x /tmp/fs-setup.sh
 
-sudo chmod +x root.x86_64/usr/bin/fs-setup.sh
+sudo mv /tmp/fs-setup.sh root.x86_64/usr/bin/.
 
 sudo arch-chroot root.x86_64 fs-setup.sh
+sudo rm root.x86_64/usr/bin/fs-setup.sh
 
 sudo tar -czv install.tar.gz root.x86_64/*
 
+exit
