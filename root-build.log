@@ -4,16 +4,16 @@ set -o xtrace
 
 wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
 +wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-2019-10-31 16:18:29 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
-2019-10-31 16:18:29 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
-2019-10-31 16:18:57 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz [154472911/154472911] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz" [1]
-2019-10-31 16:18:57 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz.sig" [1]
-2019-10-31 16:18:57 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
-2019-10-31 16:18:57 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
-2019-10-31 16:18:57 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
-FINISHED --2019-10-31 16:18:57--
-Total wall clock time: 29s
-Downloaded: 7 files, 147M in 28s (5.23 MB/s)
+2019-10-31 16:25:14 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
+2019-10-31 16:25:14 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
+2019-10-31 16:25:48 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz [154472911/154472911] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz" [1]
+2019-10-31 16:25:48 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.10.01-x86_64.tar.gz.sig" [1]
+2019-10-31 16:25:48 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
+2019-10-31 16:25:48 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
+2019-10-31 16:25:48 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
+FINISHED --2019-10-31 16:25:48--
+Total wall clock time: 35s
+Downloaded: 7 files, 147M in 35s (4.26 MB/s)
 mkdir -p /tmp/rootwork
 +mkdir -p /tmp/rootwork
 cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* /tmp/rootwork/.
@@ -32,9 +32,9 @@ gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
 gpg:               imported: 1
 gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons | sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p' | gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
++gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
 +gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
 +sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p'
-+gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
 gpg: inserting ownertrust of 6
 gpg: inserting ownertrust of 6
 gpg --no-default-keyring --keyring ./vendors.gpg --verify *.sig
