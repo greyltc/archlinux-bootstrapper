@@ -23,9 +23,8 @@ Include = /etc/pacman.d/mirrorlist
 Include = /etc/pacman.d/mirrorlist
 EOF
   sudo mkdir -p "${TMPDIR}"/genroot
-  sudo pacstrap -C "${TMPDIR}"/pacman.conf -c -d -G -M "${TMPDIR}"/genroot arch-install-scripts systemd
-  sudo rm "${TMPDIR}"/genroot/var/lib/pacman/sync/*
-  sudo mount --bind "${TMPDIR}"/genroot "${TMPDIR}"/root
+  sudo pacstrap -C "${TMPDIR}"/pacman.conf -c -d -G -M "${TMPDIR}"/root arch-install-scripts systemd
+  sudo rm "${TMPDIR}"/root/var/lib/pacman/sync/*
 }
 
 fetch_root() {
@@ -40,9 +39,8 @@ fetch_root() {
   rm vendors.gpg* *.sig
 
   sudo tar xzf archlinux-bootstrap-*-x86_64.tar.gz
+  sudo mv root.x86_64 root
 
-  sudo ln -s root.x86_64 root
-  sudo mount --bind root.x86_64 root
   sudo rm root/README
   popd
 }
@@ -53,6 +51,9 @@ if [ -f "/etc/arch-release" ]; then
 else
   fetch_root
 fi
+
+sudo mkdir -p "${TMPDIR}"/root-bind
+sudo mount --bind "${TMPDIR}"/root "${TMPDIR}"/root-bind
 
 cat > "${TMPDIR}"/setup-tasks.sh << "EOF"
 #!/usr/bin/env bash
@@ -70,27 +71,27 @@ curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/
 cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
 
-pacman -Syyu --noconfirm sed pacman-contrib
+pacman -Syyu --needed --noconfirm sed pacman-contrib base
 
 LOCALE=en_US.UTF-8
 CHARSET=UTF-8
 sed -i "s,^#${LOCALE} ${CHARSET},${LOCALE} ${CHARSET},g" /etc/locale.gen
-locale-gen
 localectl set-locale LANG=${LOCALE}
+locale-gen
 
-sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
-rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+#sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+#rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 
-pacman -Syyu --noconfirm vim
+pacman -Syyu --needed --noconfirm vim base-devel git
 EOF
 chmod +x "${TMPDIR}"/setup-tasks.sh
-sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root/usr/bin/setup-tasks.sh
+sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
 
-sudo "${TMPDIR}"/root/bin/arch-chroot "${TMPDIR}"/root/ setup-tasks.sh
-sudo rm "${TMPDIR}"/root/bin/setup-tasks.sh
+sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
+sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
+sudo umount "${TMPDIR}"/root-bind
 
 sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | gzip -9 > ${TMPDIR}/root.tar.gz)"
 mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
-sudo umount "${TMPDIR}"/root
 sudo rm -rf "${TMPDIR}"
 
