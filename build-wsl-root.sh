@@ -20,17 +20,17 @@ rm *.sig vendors.gpg*
 
 mv archlinux-bootstrap-* install.tar.gz
 
-mkdir rootmount
-archivemount install.tar.gz rootmount
+sudo tar xzf install.tar.gz
+rm install.tar.gz
 
-cat <<EOF > rootmount/root.x86_64/usr/bin/fs-setup.sh
+sudo cat <<EOF > root.x86_64/usr/bin/fs-setup.sh
 touch /poop
+echo "poop touched!"
 EOF
 
-chmod +x rootmount/root.x86_64/usr/bin/fs-setup.sh
+sudo chmod +x root.x86_64/usr/bin/fs-setup.sh
 
-fakeroot fakechroot arch-chroot rootmount/root.x86_64 fs-setup.sh
+sudo arch-chroot root.x86_64 fs-setup.sh
 
-#exit
-unmount rootmount
+sudo tar -czv install.tar.gz root.x86_64/*
 
