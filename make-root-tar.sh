@@ -9,6 +9,7 @@ CURDIR=$(pwd)
 TMPDIR=$(mktemp -d /tmp/genbootstrap.XXXXXX)
 
 build_root() {
+  sudo mkdir -p "${TMPDIR}"/root
   cat > "${TMPDIR}"/pacman.conf << "EOF"
 [options]
 Architecture = auto
@@ -33,10 +34,8 @@ fetch_root() {
   cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* .
 
   # verify .sig
-  gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
-  gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons | sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p' | gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
-  gpg --no-default-keyring --keyring ./vendors.gpg --verify *.sig
-  rm vendors.gpg* *.sig
+  gpg --trust-model always --verify *.sig
+  rm *.sig
 
   sudo tar xzf archlinux-bootstrap-*-x86_64.tar.gz
   sudo mv root.x86_64 root
@@ -44,7 +43,6 @@ fetch_root() {
   popd
 }
 
-sudo mkdir -p "${TMPDIR}"/root
 if [ -f "/etc/arch-release" ]; then
   build_root
 else
@@ -82,7 +80,7 @@ locale-gen
 #rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 
 #pacman -Syyu --needed --noconfirm vim base-devel git
-pacman -Syyu vim
+pacman -Syyu --needed --noconfirm vim
 EOF
 chmod +x "${TMPDIR}"/setup-tasks.sh
 sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
