@@ -30,7 +30,7 @@ touch poop
 echo "poop touched!"
 EOF
 chmod +x /tmp/setup-tasks.sh
-sudo mv /tmp/setup-tasks.sh  mnt/usr/bin/.
+sudo sh -c 'mv /tmp/setup-tasks.sh  mnt/usr/bin/.'
 
 sudo arch-chroot mnt setup-tasks.sh
 sudo rm mnt/usr/bin/setup-tasks.sh
