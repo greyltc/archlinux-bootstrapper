@@ -9,7 +9,9 @@ set -o xtrace
 #set -e -u -o pipefail
 
 wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* .
+mkdir -p /tmp/rootwork
+cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* /tmp/rootwork/.
+pushd /tmp/rootwork
 
 # verify .sig
 gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
@@ -17,23 +19,22 @@ gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --wit
 gpg --no-default-keyring --keyring ./vendors.gpg --verify *.sig
 rm vendors.gpg* *.sig
 
-mv archlinux-bootstrap-*.tar.gz root.tar.gz
-
-mkdir mnt
-sudo archivemount root.tar.gz mnt
-
-sudo sh -c 'mv mnt/root.x86_64/* mnt/.'
-sudo rm -rf mnt/root.x86_64
+tar xzf archlinux-bootstrap-*-x86_64.tar.gz
 
 cat <<EOF > /tmp/setup-tasks.sh
 touch poop
 echo "poop touched!"
 EOF
 chmod +x /tmp/setup-tasks.sh
-sudo sh -c 'mv /tmp/setup-tasks.sh  mnt/usr/bin/.'
+sudo sh -c 'mv /tmp/setup-tasks.sh  /tmp/rootwork/root.x86_64/usr/bin/.'
 
-sudo arch-chroot mnt setup-tasks.sh
-sudo rm mnt/usr/bin/setup-tasks.sh
+sudo /tmp/rootwork/root.x86_64/bin/arch-chroot /tmp/rootwork/root.x86_64/ setup-tasks.sh
+sudo rm /tmp/rootwork/root.x86_64/bin/setup-tasks.sh
 
-sudo umount mnt
-rm -rf mnt
+sudo sh -c 'cd /tmp/rootwork/root.x86_64 && tar -zcf ../root.tar.gz *'
+
+popd
+
+mv /tmp/rootwork/root.tar.gz .
+
+rm -rf /tmp/rootwork
