@@ -41,7 +41,6 @@ fetch_root() {
   sudo tar xzf archlinux-bootstrap-*-x86_64.tar.gz
   sudo mv root.x86_64 root
 
-  sudo rm root/README
   popd
 }
 
@@ -82,7 +81,8 @@ locale-gen
 #sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
 #rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 
-pacman -Syyu --needed --noconfirm vim base-devel git
+#pacman -Syyu --needed --noconfirm vim base-devel git
+pacman -Syyu vim
 EOF
 chmod +x "${TMPDIR}"/setup-tasks.sh
 sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
