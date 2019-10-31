@@ -2,14 +2,13 @@
 set -e -u -o pipefail
 
 cd $TRAVIS_BUILD_DIR
-
-./build-wsl-root.sh |& tee wsl-build.log
-
 git config user.name "Travis CI"
 git config user.email "travis@rob.ot"
 
-git add wsl-build.log
-git add install.tar.gz
+./make-root-tar.sh |& tee root-build.log
+
+git add root-build.log
+git add root.tar.gz
 
 chmod 600 travis_key
 eval `ssh-agent -s`
