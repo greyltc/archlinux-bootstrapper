@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-set -e -u -o pipefail
+set -o pipefail
+set -o errexit
+set -o nounset
+set -o verbose
+set -o xtrace
 
 cd $TRAVIS_BUILD_DIR
 git config user.name "Travis CI"
