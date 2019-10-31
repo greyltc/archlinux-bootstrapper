@@ -15,26 +15,25 @@ cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* .
 gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
 gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons | sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p' | gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
 gpg --no-default-keyring --keyring ./vendors.gpg --verify *.sig
-rm vendors.gpg*
+rm vendors.gpg* *.dig
 
-#sudo tar xzf archlinux-bootstrap-*.tar.gz
+mv archlinux-bootstrap-*.tar.gz root.tar.gz
+
 mkdir mnt
-sudo archivemount archlinux-bootstrap-*.tar.gz mnt
+sudo archivemount root.tar.gz mnt
 
 sudo sh -c 'mv mnt/root.x86_64/* mnt/.'
 sudo rm -rf mnt/root.x86_64
 
-cat <<EOF > /tmp/fs-setup.sh
+cat <<EOF > /tmp/setup-tasks.sh
 touch poop
 echo "poop touched!"
 EOF
-chmod +x mnt/usr/bin/fs-setup.sh
-sudo mv  /tmp/fs-setup.sh  mnt/usr/bin/fs-setup.sh
+chmod +x /tmp/setup-tasks.sh
+sudo mv /tmp/setup-tasks.sh  mnt/usr/bin/.
 
-sudo arch-chroot mnt fs-setup.sh
-rm mnt/usr/bin/fs-setup.sh
+sudo arch-chroot mnt setup-tasks.sh
+sudo rm mnt/usr/bin/setup-tasks.sh
 
 sudo umount mnt
 rm -rf mnt
-
-mv archlinux-bootstrap-*.tar.gz install.tar.gz
