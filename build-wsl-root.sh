@@ -34,6 +34,6 @@ sudo mv /tmp/fs-setup.sh root.x86_64/usr/bin/.
 sudo arch-chroot root.x86_64 fs-setup.sh
 sudo rm root.x86_64/usr/bin/fs-setup.sh
 
-sudo tar -czv install.tar.gz root.x86_64/*
-
+cd root.x86_64
+sudo tar czf ../install.tar.gz .
 exit
