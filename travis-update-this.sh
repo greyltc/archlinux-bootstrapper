@@ -15,7 +15,7 @@ eval `ssh-agent -s`
 ssh-add .travis_key.txt
 GH_TOKEN=`cat .gh_token.txt`
 # destroy their files
-rm .travis_key.txt .github_token.txt .secrets.tar
+rm .travis_key.txt .gh_token.txt .secrets.tar
 
 ./make-root-tar.sh |& tee root-build.log
 
