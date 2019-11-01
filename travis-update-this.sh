@@ -46,4 +46,4 @@ REL_ID=`echo ${REL_RES} | python -c 'import json,sys;print(json.load(sys.stdin)[
 
 ASSET=root.tar.gz
 LABEL="Compressed root file system (with no kernel)"
-curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL}"
+curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=\"${LABEL}\""
