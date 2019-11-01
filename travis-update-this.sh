@@ -13,7 +13,7 @@ git config user.email "travis@rob.ot"
 chmod 600 .travis_key.txt
 eval `ssh-agent -s`
 ssh-add .travis_key.txt
-GH_TOKEN=`cat .github_token.txt`
+GH_TOKEN=`cat .gh_token.txt`
 # destroy their files
 rm .travis_key.txt .github_token.txt .secrets.tar
 
