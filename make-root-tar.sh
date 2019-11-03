@@ -93,5 +93,6 @@ sudo umount "${TMPDIR}"/root-bind
 
 sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | gzip -9 > ${TMPDIR}/root.tar.gz)"
 mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
-sudo rm -rf "${TMPDIR}"
+#sudo rm -rf "${TMPDIR}"
+export TMPDIR
 
