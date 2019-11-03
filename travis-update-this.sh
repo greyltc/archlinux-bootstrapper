@@ -22,7 +22,7 @@ set -o xtrace
 rm .travis_key.txt .gh_token.txt .secrets.tar
 
 ./make-root-tar.sh |& tee root-build.log
-TMPDIR=(cat TMPDIR)
+TMPDIR=$(cat TMPDIR)
 rm TMPDIR
 ./wsl-root-mod.sh "${TMPDIR}"|& tee root-build.log
 
