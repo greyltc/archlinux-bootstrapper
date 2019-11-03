@@ -5,6 +5,9 @@ set -o nounset
 set -o verbose
 set -o xtrace
 
+LABEL="Compressed root file system (with no kernel)"
+LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
+
 cd $TRAVIS_BUILD_DIR
 git config user.name "Travis CI"
 git config user.email "travis@rob.ot"
