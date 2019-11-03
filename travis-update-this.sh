@@ -5,9 +5,6 @@ set -o nounset
 set -o verbose
 set -o xtrace
 
-LABEL="Compressed root file system (with no kernel)"
-LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
-
 cd $TRAVIS_BUILD_DIR
 git config user.name "Travis CI"
 git config user.email "travis@rob.ot"
@@ -61,11 +58,11 @@ set +o verbose
 REL_RES="$(curl --data "{\"tag_name\": \"${GH_TAG}\",\"target_commitish\": \"${GH_BRANCH}\",\"name\": \"${GH_RELEASE}\",\"body\": \"Release of version ${GH_RELEASE/v/}\",\"draft\": false,\"prerelease\": false}" https://api.github.com/repos/${GH_USER}/${GH_PROJ}/releases?access_token=$GH_TOKEN)"
 set -o verbose
 set -o xtrace
-REL_ID=`echo ${REL_RES} | python -c 'import json,sys;print(json.load(sys.stdin)["id"])'`
+REL_ID=`echo ${REL_RES} | python3 -c 'import json,sys;print(json.load(sys.stdin)["id"])'`
 
 ASSET=root.tar.gz
 LABEL="Compressed root file system (with no kernel)"
-LABEL_ESC=$(python -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
+LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
 unset -o xtrace
 unset -o verbose
 curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
