@@ -33,7 +33,10 @@ rm -rf fakeroot-tcp
 git clone https://aur.archlinux.org/linux-wsl.git
 cd linux-wsl
 makepkg -Cfis --needed --noconfirm
-#rm -rf linux-wsl
+mv *.pkg.tar.xz /.
+rm -rf linux-wsl
+cd /
+ln -s *.pkg.tar.xz linux-wsl.pkg.tar.xz
 
 pacman -Rs --noconfirm base-devel git po4a
 EOF

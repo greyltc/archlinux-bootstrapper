@@ -21,13 +21,16 @@ set -o verbose
 set -o xtrace
 rm .travis_key.txt .gh_token.txt .secrets.tar
 
+# make the default root fs
 ./make-root-tar.sh |& tee root-build.log
 git add root-build.log
 #git add root.tar.gz
 TMPDIR=$(cat TMPDIR)
 rm TMPDIR
-#./wsl-root-mod.sh "${TMPDIR}"|& tee wsl-mod.log
-#git add wsl-mod.log
+
+# modify it for wsl
+./wsl-root-mod.sh "${TMPDIR}"|& tee wsl-mod.log
+git add wsl-mod.log
 #git add root-wsl.tar.gz
 
 sudo rm -rf "${TMPDIR}"
@@ -66,3 +69,11 @@ LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))
 set +o xtrace
 set +o verbose
 curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
+
+ASSET=root-wsl.tar.gz
+LABEL="Compressed root fs (modded for WSL)"
+LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
+set +o xtrace
+set +o verbose
+curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
+
