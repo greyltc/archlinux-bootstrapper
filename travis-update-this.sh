@@ -15,7 +15,7 @@ eval `ssh-agent -s`
 ssh-add .travis_key.txt
 set +o xtrace
 set +o verbose
-local GH_TOKEN=`cat .gh_token.txt`
+GH_TOKEN=`cat .gh_token.txt`
 # destroy their files
 set -o verbose
 set -o xtrace
