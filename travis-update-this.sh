@@ -30,7 +30,7 @@ rm TMPDIR
 #git add wsl-mod.log
 #git add root-wsl.tar.gz
 
-rm -rf "${TMPDIR}"
+sudo rm -rf "${TMPDIR}"
 
 #git add root.tar.gz
 
