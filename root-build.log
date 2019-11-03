@@ -5,7 +5,7 @@ CURDIR=$(pwd)
 +CURDIR=/home/travis/build/greyltc/archlinux-bootstrapper
 TMPDIR=$(mktemp -d /tmp/genbootstrap.XXXXXX)
 ++mktemp -d /tmp/genbootstrap.XXXXXX
-+TMPDIR=/tmp/genbootstrap.pSe1AQ
++TMPDIR=/tmp/genbootstrap.H0NaNs
 
 build_root() {
   sudo mkdir -p "${TMPDIR}"/root
@@ -51,19 +51,19 @@ else
 fi
 +'[' -f /etc/arch-release ']'
 +fetch_root
-+pushd /tmp/genbootstrap.pSe1AQ
-/tmp/genbootstrap.pSe1AQ ~/build/greyltc/archlinux-bootstrapper
++pushd /tmp/genbootstrap.H0NaNs
+/tmp/genbootstrap.H0NaNs ~/build/greyltc/archlinux-bootstrapper
 +wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-2019-11-03 17:13:30 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
-2019-11-03 17:13:30 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
-2019-11-03 17:14:07 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz [163611443/163611443] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz" [1]
-2019-11-03 17:14:07 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig" [1]
-2019-11-03 17:14:07 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
-2019-11-03 17:14:07 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
-2019-11-03 17:14:07 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
-FINISHED --2019-11-03 17:14:07--
-Total wall clock time: 37s
-Downloaded: 7 files, 156M in 37s (4.25 MB/s)
+2019-11-03 17:21:04 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
+2019-11-03 17:21:04 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
+2019-11-03 17:21:34 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz [163611443/163611443] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz" [1]
+2019-11-03 17:21:35 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig" [1]
+2019-11-03 17:21:35 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
+2019-11-03 17:21:35 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
+2019-11-03 17:21:35 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
+FINISHED --2019-11-03 17:21:35--
+Total wall clock time: 31s
+Downloaded: 7 files, 156M in 31s (5.07 MB/s)
 +cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig .
 +gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
 gpg: keybox './vendors.gpg' created
@@ -72,9 +72,9 @@ gpg: key 7F2D434B9741E8AC: public key "Pierre Schmitz <pierre@archlinux.de>" imp
 gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
 gpg:               imported: 1
++sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p'
 +gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
 +gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
-+sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p'
 gpg: inserting ownertrust of 6
 gpg: inserting ownertrust of 6
 +gpg --trust-model always --no-default-keyring --keyring ./vendors.gpg --verify archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig
@@ -92,9 +92,9 @@ tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.security.capabil
 ~/build/greyltc/archlinux-bootstrapper
 
 sudo mkdir -p "${TMPDIR}"/root-bind
-+sudo mkdir -p /tmp/genbootstrap.pSe1AQ/root-bind
++sudo mkdir -p /tmp/genbootstrap.H0NaNs/root-bind
 sudo mount --bind "${TMPDIR}"/root "${TMPDIR}"/root-bind
-+sudo mount --bind /tmp/genbootstrap.pSe1AQ/root /tmp/genbootstrap.pSe1AQ/root-bind
++sudo mount --bind /tmp/genbootstrap.H0NaNs/root /tmp/genbootstrap.H0NaNs/root-bind
 
 cat > "${TMPDIR}"/setup-tasks.sh << "EOF"
 #!/usr/bin/env bash
@@ -128,12 +128,12 @@ pacman -Syyu --needed --noconfirm vim
 EOF
 +cat
 chmod +x "${TMPDIR}"/setup-tasks.sh
-+chmod +x /tmp/genbootstrap.pSe1AQ/setup-tasks.sh
++chmod +x /tmp/genbootstrap.H0NaNs/setup-tasks.sh
 sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
-+sudo mv /tmp/genbootstrap.pSe1AQ/setup-tasks.sh /tmp/genbootstrap.pSe1AQ/root-bind/usr/bin/setup-tasks.sh
++sudo mv /tmp/genbootstrap.H0NaNs/setup-tasks.sh /tmp/genbootstrap.H0NaNs/root-bind/usr/bin/setup-tasks.sh
 
 sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
-+sudo /tmp/genbootstrap.pSe1AQ/root-bind/bin/arch-chroot /tmp/genbootstrap.pSe1AQ/root-bind/ setup-tasks.sh
++sudo /tmp/genbootstrap.H0NaNs/root-bind/bin/arch-chroot /tmp/genbootstrap.H0NaNs/root-bind/ setup-tasks.sh
 bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 set -o xtrace
 
@@ -146,9 +146,9 @@ gpg: starting migration from earlier GnuPG versions
 gpg: porting secret keys from '/etc/pacman.d/gnupg/secring.gpg' to gpg-agent
 gpg: migration succeeded
 gpg: Generating pacman keyring master key...
-gpg: key 09C047B782F1CC6D marked as ultimately trusted
+gpg: key 27BB939BCF884C03 marked as ultimately trusted
 gpg: directory '/etc/pacman.d/gnupg/openpgp-revocs.d' created
-gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/9716F99CAD18F2823ABE020609C047B782F1CC6D.rev'
+gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/12EBBDFF8D33F00A86C15C9F27BB939BCF884C03.rev'
 gpg: Done
 ==> Updating trust database...
 gpg: marginals needed: 3  completes needed: 1  trust model: pgp
@@ -246,7 +246,7 @@ curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/
 + curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/all/https/
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 11594  100 11594    0     0  19355      0 --:--:-- --:--:-- --:--:-- 19355
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 11594  100 11594    0     0  18852      0 --:--:-- --:--:-- --:--:-- 18821
 cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 + cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
@@ -404,15 +404,15 @@ Optional dependencies for vim
 Running in chroot, ignoring request: daemon-reload
 (2/2) Arming ConditionNeedsUpdate...
 sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
-+sudo rm /tmp/genbootstrap.pSe1AQ/root-bind/bin/setup-tasks.sh
++sudo rm /tmp/genbootstrap.H0NaNs/root-bind/bin/setup-tasks.sh
 sudo umount "${TMPDIR}"/root-bind
-+sudo umount /tmp/genbootstrap.pSe1AQ/root-bind
++sudo umount /tmp/genbootstrap.H0NaNs/root-bind
 
 sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | gzip -9 > ${TMPDIR}/root.tar.gz)"
-+sudo sh -c '(cd /tmp/genbootstrap.pSe1AQ/root; bsdtar -cf - * | gzip -9 > /tmp/genbootstrap.pSe1AQ/root.tar.gz)'
++sudo sh -c '(cd /tmp/genbootstrap.H0NaNs/root; bsdtar -cf - * | gzip -9 > /tmp/genbootstrap.H0NaNs/root.tar.gz)'
 : tar format cannot archive socket: tar format cannot archive socket: tar format cannot archive socket: tar format cannot archive socketmv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
-+mv /tmp/genbootstrap.pSe1AQ/root.tar.gz /home/travis/build/greyltc/archlinux-bootstrapper/root.tar.gz
++mv /tmp/genbootstrap.H0NaNs/root.tar.gz /home/travis/build/greyltc/archlinux-bootstrapper/root.tar.gz
 #sudo rm -rf "${TMPDIR}"
 echo ${TMPDIR} > TMPDIR
-+echo /tmp/genbootstrap.pSe1AQ
++echo /tmp/genbootstrap.H0NaNs
 
