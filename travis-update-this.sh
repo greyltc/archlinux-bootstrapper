@@ -26,13 +26,13 @@ rm .travis_key.txt .gh_token.txt .secrets.tar
 git add root-build.log
 TMPDIR=$(cat TMPDIR)
 rm TMPDIR
-sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > root.tar.gz)"
+sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > "${TRAVIS_BUILD_DIR}"/root.tar.gz)"
 #git add root.tar.gz
 
 # modify it for wsl
 ./wsl-root-mod.sh "${TMPDIR}"|& tee wsl-mod.log
 git add wsl-mod.log
-sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > root-wsl.tar.gz)"
+sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > "${TRAVIS_BUILD_DIR}"/root-wsl.tar.gz)"
 #git add root-wsl.tar.gz
 
 sudo rm -rf "${TMPDIR}"
