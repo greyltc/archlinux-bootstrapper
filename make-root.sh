@@ -79,7 +79,9 @@ localectl set-locale LANG=${LOCALE}
 locale-gen
 
 # fixup mirrors
-reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+echo -e '#!/usr/bin/env bash\nreflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist' > /usr/bin/reflect-mirrors
+chmod +x /usr/bin/reflect-mirrors
+reflect-mirrors
 
 # setup package building stuff
 groupadd builders
