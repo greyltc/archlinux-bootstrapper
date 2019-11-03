@@ -1,100 +1,19 @@
 set -o xtrace
 
+TMPDIR="$1"
++TMPDIR=/tmp/genbootstrap.lJWYyd
 CURDIR=$(pwd)
 ++pwd
 +CURDIR=/home/travis/build/greyltc/archlinux-bootstrapper
-TMPDIR=$(mktemp -d /tmp/genbootstrap.XXXXXX)
-++mktemp -d /tmp/genbootstrap.XXXXXX
-+TMPDIR=/tmp/genbootstrap.5M6NYr
 
-build_root() {
-  sudo mkdir -p "${TMPDIR}"/root
-  cat > "${TMPDIR}"/pacman.conf << "EOF"
-[options]
-Architecture = auto
-CheckSpace
-Color
-SigLevel = Required DatabaseOptional
-[core]
-Include = /etc/pacman.d/mirrorlist
-[extra]
-Include = /etc/pacman.d/mirrorlist
-[community]
-Include = /etc/pacman.d/mirrorlist
-EOF
-  sudo mkdir -p "${TMPDIR}"/genroot
-  sudo pacstrap -C "${TMPDIR}"/pacman.conf -c -d -G -M "${TMPDIR}"/root arch-install-scripts systemd
-  sudo rm "${TMPDIR}"/root/var/lib/pacman/sync/*
-}
-
-fetch_root() {
-  pushd "${TMPDIR}"
-  wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-  cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-* .
-
-  # verify .sig
-  gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
-  gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons | sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p' | gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
-  gpg --trust-model always --no-default-keyring --keyring ./vendors.gpg --verify *.sig
-  rm *.sig
-
-  sudo tar xzf archlinux-bootstrap-*-x86_64.tar.gz
-  sudo mv root.x86_64 root
-
-  popd
-}
-
-if [ -f "/etc/arch-release" ]; then
-  build_root
-else
-  fetch_root
-fi
-+'[' -f /etc/arch-release ']'
-+fetch_root
-+pushd /tmp/genbootstrap.5M6NYr
-/tmp/genbootstrap.5M6NYr ~/build/greyltc/archlinux-bootstrapper
-+wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-2019-11-02 10:58:54 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
-2019-11-02 10:58:54 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
-2019-11-02 10:59:28 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz [163611443/163611443] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz" [1]
-2019-11-02 10:59:28 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig" [1]
-2019-11-02 10:59:28 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
-2019-11-02 10:59:28 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
-2019-11-02 10:59:28 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
-FINISHED --2019-11-02 10:59:28--
-Total wall clock time: 35s
-Downloaded: 7 files, 156M in 34s (4.57 MB/s)
-+cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig .
-+gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
-gpg: keybox './vendors.gpg' created
-gpg: key 7F2D434B9741E8AC: 48 signatures not checked due to missing keys
-gpg: key 7F2D434B9741E8AC: public key "Pierre Schmitz <pierre@archlinux.de>" imported
-gpg: no ultimately trusted keys found
-gpg: Total number processed: 1
-gpg:               imported: 1
-+gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
-+sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p'
-+gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
-gpg: inserting ownertrust of 6
-gpg: inserting ownertrust of 6
-+gpg --trust-model always --no-default-keyring --keyring ./vendors.gpg --verify archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig
-gpg: assuming signed data in 'archlinux-bootstrap-2019.11.01-x86_64.tar.gz'
-gpg: Signature made Fri 01 Nov 2019 04:34:35 PM UTC
-gpg:                using RSA key 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
-gpg: Good signature from "Pierre Schmitz <pierre@archlinux.de>" [unknown]
-gpg: WARNING: Using untrusted key!
-+rm archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig
-+sudo tar xzf archlinux-bootstrap-2019.11.01-x86_64.tar.gz
-tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.security.capability'
-tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.security.capability'
-+sudo mv root.x86_64 root
-+popd
-~/build/greyltc/archlinux-bootstrapper
+echo ${TMPDIR}
++echo /tmp/genbootstrap.lJWYyd
+/tmp/genbootstrap.lJWYyd
 
 sudo mkdir -p "${TMPDIR}"/root-bind
-+sudo mkdir -p /tmp/genbootstrap.5M6NYr/root-bind
++sudo mkdir -p /tmp/genbootstrap.lJWYyd/root-bind
 sudo mount --bind "${TMPDIR}"/root "${TMPDIR}"/root-bind
-+sudo mount --bind /tmp/genbootstrap.5M6NYr/root /tmp/genbootstrap.5M6NYr/root-bind
++sudo mount --bind /tmp/genbootstrap.lJWYyd/root /tmp/genbootstrap.lJWYyd/root-bind
 
 cat > "${TMPDIR}"/setup-tasks.sh << "EOF"
 #!/usr/bin/env bash
@@ -104,314 +23,31 @@ set -o nounset
 set -o verbose
 set -o xtrace
 
-pacman-key --init
-pacman-key --populate archlinux
-#cd /root
+touch poop
 
-curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/all/https/
-cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
-echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
-
-pacman -Syyu --needed --noconfirm sed pacman-contrib base
-
-LOCALE=en_US.UTF-8
-CHARSET=UTF-8
-sed -i "s,^#${LOCALE} ${CHARSET},${LOCALE} ${CHARSET},g" /etc/locale.gen
-localectl set-locale LANG=${LOCALE}
-locale-gen
-
-#sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
-#rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
-
-#pacman -Syyu --needed --noconfirm vim base-devel git
-pacman -Syyu --needed --noconfirm vim
 EOF
 +cat
+
 chmod +x "${TMPDIR}"/setup-tasks.sh
-+chmod +x /tmp/genbootstrap.5M6NYr/setup-tasks.sh
++chmod +x /tmp/genbootstrap.lJWYyd/setup-tasks.sh
 sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
-+sudo mv /tmp/genbootstrap.5M6NYr/setup-tasks.sh /tmp/genbootstrap.5M6NYr/root-bind/usr/bin/setup-tasks.sh
++sudo mv /tmp/genbootstrap.lJWYyd/setup-tasks.sh /tmp/genbootstrap.lJWYyd/root-bind/usr/bin/setup-tasks.sh
 
 sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
-+sudo /tmp/genbootstrap.5M6NYr/root-bind/bin/arch-chroot /tmp/genbootstrap.5M6NYr/root-bind/ setup-tasks.sh
-bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
++sudo /tmp/genbootstrap.lJWYyd/root-bind/bin/arch-chroot /tmp/genbootstrap.lJWYyd/root-bind/ setup-tasks.sh
 set -o xtrace
 
-pacman-key --init
-+ pacman-key --init
-/usr/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-gpg: /etc/pacman.d/gnupg/trustdb.gpg: trustdb created
-gpg: no ultimately trusted keys found
-gpg: starting migration from earlier GnuPG versions
-gpg: porting secret keys from '/etc/pacman.d/gnupg/secring.gpg' to gpg-agent
-gpg: migration succeeded
-gpg: Generating pacman keyring master key...
-gpg: key 7EBB26B07650BFEC marked as ultimately trusted
-gpg: directory '/etc/pacman.d/gnupg/openpgp-revocs.d' created
-gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/4CC95C19DF6B8F2BA64A124D7EBB26B07650BFEC.rev'
-gpg: Done
-==> Updating trust database...
-gpg: marginals needed: 3  completes needed: 1  trust model: pgp
-gpg: depth: 0  valid:   1  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 1u
-pacman-key --populate archlinux
-+ pacman-key --populate archlinux
-/usr/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-==> Appending keys from archlinux.gpg...
-==> Locally signing trusted keys in keyring...
-  -> Locally signing key D8AFDDA07A5B6EDFA7D8CCDAD6D055F927843F1C...
-  -> Locally signing key DDB867B92AA789C165EEFA799B729B06A680C281...
-  -> Locally signing key 91FFE0700E80619CEB73235CA88E23E377514E00...
-  -> Locally signing key 0E8B644079F599DFC1DDC3973348882F6AC6A4C2...
-  -> Locally signing key AB19265E5D7D20687D303246BA1DFB64FFF979E7...
-==> Importing owner trust values...
-gpg: inserting ownertrust of 4
-gpg: setting ownertrust to 4
-gpg: setting ownertrust to 4
-gpg: setting ownertrust to 4
-gpg: setting ownertrust to 4
-==> Disabling revoked keys in keyring...
-  -> Disabling key 8F76BEEA0289F9E1D3E229C05F946DED983D4366...
-  -> Disabling key 63F395DE2D6398BBE458F281F2DBB4931985A992...
-  -> Disabling key 50F33E2E5B0C3D900424ABE89BDCF497A4BBCC7F...
-  -> Disabling key 27FFC4769E19F096D41D9265A04F9397CDFD6BB0...
-  -> Disabling key 39F880E50E49A4D11341E8F939E4F17F295AFBF4...
-  -> Disabling key 8840BD07FC24CB7CE394A07CCF7037A4F27FB7DA...
-  -> Disabling key 5559BC1A32B8F76B3FCCD9555FA5E5544F010D48...
-  -> Disabling key 0B20CA1931F5DA3A70D0F8D2EA6836E1AB441196...
-  -> Disabling key 07DFD3A0BC213FA12EDC217559B3122E2FA915EC...
-  -> Disabling key 4FCF887689C41B09506BE8D5F3E1D5C5D30DB0AD...
-  -> Disabling key 5A2257D19FF7E1E0E415968CE62F853100F0D0F0...
-  -> Disabling key D921CABED130A5690EF1896E81AF739EC0711BF1...
-  -> Disabling key 7FA647CD89891DEDC060287BB9113D1ED21E1A55...
-  -> Disabling key BC1FBE4D2826A0B51E47ED62E2539214C6C11350...
-  -> Disabling key 4A8B17E20B88ACA61860009B5CED81B7C2E5C0D2...
-  -> Disabling key 5696C003B0854206450C8E5BE613C09CB4440678...
-  -> Disabling key 684148BB25B49E986A4944C55184252D824B18E8...
-  -> Disabling key 8CF934E339CAD8ABF342E822E711306E3C4F88BC...
-  -> Disabling key F5A361A3A13554B85E57DDDAAF7EF7873CFD4BB6...
-  -> Disabling key 5E7585ADFF106BFFBBA319DC654B877A0864983E...
-  -> Disabling key 65EEFE022108E2B708CBFCF7F9E712E59AF5F22A...
-  -> Disabling key 40440DC037C05620984379A6761FAD69BA06C6A9...
-  -> Disabling key 34C5D94FE7E7913E86DC427E7FB1A3800C84C0A5...
-  -> Disabling key 81D7F8241DB38BC759C80FCE3A726C6170E80477...
-  -> Disabling key E7210A59715F6940CF9A4E36A001876699AD6E84...
-  -> Disabling key 5357F3B111688D88C1D88119FCF2CB179205AC90...
-  -> Disabling key FB871F0131FEA4FB5A9192B4C8880A6406361833...
-  -> Disabling key 66BD74A036D522F51DD70A3C7F2A16726521E06D...
-  -> Disabling key B1F2C889CB2CCB2ADA36D963097D629E437520BD...
-  -> Disabling key 9515D8A8EAB88E49BB65EDBCE6B456CAF15447D5...
-  -> Disabling key 76B4192E902C0A52642C63C273B8ED52F1D357C1...
-  -> Disabling key 40776A5221EF5AD468A4906D42A1DB15EC133BAD...
-  -> Disabling key D4DE5ABDE2A7287644EAC7E36D1A9E70E19DAA50...
-  -> Disabling key 44D4A033AC140143927397D47EFD567D4C7EA887...
-==> Updating trust database...
-gpg: key 1EB2638FF56C0C53: no user ID for key signature packet of class 10
-gpg: key 1EB2638FF56C0C53: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-gpg: marginals needed: 3  completes needed: 1  trust model: pgp
-gpg: depth: 0  valid:   1  signed:   5  trust: 0-, 0q, 0n, 0m, 0f, 1u
-gpg: depth: 1  valid:   5  signed:  79  trust: 0-, 0q, 0n, 5m, 0f, 0u
-gpg: depth: 2  valid:  74  signed:  24  trust: 74-, 0q, 0n, 0m, 0f, 0u
-gpg: next trustdb check due at 2020-01-22
-#cd /root
+touch poop
++ touch poop
 
-curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/all/https/
-+ curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/all/https/
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 11594  100 11594    0     0  18760      0 --:--:-- --:--:-- --:--:-- 18760
-cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
-+ cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
-echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
-+ echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch'
-
-pacman -Syyu --needed --noconfirm sed pacman-contrib base
-+ pacman -Syyu --needed --noconfirm sed pacman-contrib base
-:: Synchronizing package databases...
-downloading core.db...
-downloading extra.db...
-downloading community.db...
-:: Starting full system upgrade...
-resolving dependencies...
-looking for conflicting packages...
-
-Packages (22) fakeroot-1.24-1  file-5.37-3  gettext-0.20.1-2  grep-3.3-2  gzip-1.10-2  iana-etc-20191030-1  icu-64.2-1  iproute2-5.3.0-1  iputils-20190709-1  less-551-2  libcroco-0.6.13-1  libxml2-2.9.9-3  licenses-20191011-1  pacman-5.2.1-1  pciutils-3.6.2-1  procps-ng-3.3.15-1  psmisc-23.2-1  systemd-sysvcompat-243.78-1  tar-1.32-2  base-2-1  pacman-contrib-1.2.0-3  sed-4.7-2
-
-Total Download Size:   16.30 MiB
-Total Installed Size:  78.15 MiB
-Net Upgrade Size:      69.84 MiB
-
-:: Proceed with installation? [Y/n] 
-:: Retrieving packages...
-downloading iana-etc-20191030-1-any.pkg.tar.xz...
-downloading sed-4.7-2-x86_64.pkg.tar.xz...
-downloading fakeroot-1.24-1-x86_64.pkg.tar.xz...
-downloading pacman-5.2.1-1-x86_64.pkg.tar.xz...
-downloading file-5.37-3-x86_64.pkg.tar.xz...
-downloading grep-3.3-2-x86_64.pkg.tar.xz...
-downloading procps-ng-3.3.15-1-x86_64.pkg.tar.xz...
-downloading tar-1.32-2-x86_64.pkg.tar.xz...
-downloading icu-64.2-1-x86_64.pkg.tar.xz...
-downloading gettext-0.20.1-2-x86_64.pkg.tar.xz...
-downloading pciutils-3.6.2-1-x86_64.pkg.tar.xz...
-downloading psmisc-23.2-1-x86_64.pkg.tar.xz...
-downloading less-551-2-x86_64.pkg.tar.xz...
-downloading gzip-1.10-2-x86_64.pkg.tar.xz...
-downloading licenses-20191011-1-any.pkg.tar.xz...
-downloading systemd-sysvcompat-243.78-1-x86_64.pkg.tar.xz...
-downloading iputils-20190709-1-x86_64.pkg.tar.xz...
-downloading iproute2-5.3.0-1-x86_64.pkg.tar.xz...
-downloading base-2-1-any.pkg.tar.xz...
-downloading libxml2-2.9.9-3-x86_64.pkg.tar.xz...
-downloading libcroco-0.6.13-1-x86_64.pkg.tar.xz...
-downloading pacman-contrib-1.2.0-3-x86_64.pkg.tar.xz...
-checking keyring...
-checking package integrity...
-loading package files...
-checking for file conflicts...
-checking available disk space...
-:: Processing package changes...
-upgrading iana-etc...
-installing sed...
-installing fakeroot...
-/usr/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-upgrading pacman...
-installing pacman-contrib...
-Optional dependencies for pacman-contrib
-    mlocate: pacdiff
-    findutils: pacdiff [installed]
-installing file...
-installing grep...
-installing procps-ng...
-installing tar...
-installing icu...
-installing libxml2...
-installing libcroco...
-installing gettext...
-Optional dependencies for gettext
-    git: for autopoint infrastructure updates
-installing pciutils...
-installing psmisc...
-installing less...
-installing gzip...
-installing licenses...
-installing systemd-sysvcompat...
-installing iputils...
-/usr/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-Optional dependencies for iputils
-    xinetd: for tftpd
-installing iproute2...
-Optional dependencies for iproute2
-    linux-atm: ATM support
-installing base...
-Optional dependencies for base
-    linux: bare metal support
-:: Running post-transaction hooks...
-(1/2) Reloading system manager configuration...
-/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-Running in chroot, ignoring request: daemon-reload
-(2/2) Arming ConditionNeedsUpdate...
-/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-
-LOCALE=en_US.UTF-8
-+ LOCALE=en_US.UTF-8
-CHARSET=UTF-8
-+ CHARSET=UTF-8
-sed -i "s,^#${LOCALE} ${CHARSET},${LOCALE} ${CHARSET},g" /etc/locale.gen
-+ sed -i 's,^#en_US.UTF-8 UTF-8,en_US.UTF-8 UTF-8,g' /etc/locale.gen
-localectl set-locale LANG=${LOCALE}
-+ localectl set-locale LANG=en_US.UTF-8
-locale-gen
-+ locale-gen
-/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-Generating locales...
-  en_US.UTF-8... done
-Generation complete.
-
-#sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
-#rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
-
-#pacman -Syyu --needed --noconfirm vim base-devel git
-pacman -Syyu --needed --noconfirm vim
-+ pacman -Syyu --needed --noconfirm vim
-:: Synchronizing package databases...
-downloading core.db...
-downloading extra.db...
-downloading community.db...
-:: Starting full system upgrade...
-resolving dependencies...
-looking for conflicting packages...
-
-Packages (3) gpm-1.20.7.r27.g1fd1941-1  vim-runtime-8.1.2102-1  vim-8.1.2102-1
-
-Total Download Size:    7.20 MiB
-Total Installed Size:  33.20 MiB
-
-:: Proceed with installation? [Y/n] 
-:: Retrieving packages...
-downloading gpm-1.20.7.r27.g1fd1941-1-x86_64.pkg.tar.xz...
-downloading vim-runtime-8.1.2102-1-x86_64.pkg.tar.xz...
-downloading vim-8.1.2102-1-x86_64.pkg.tar.xz...
-checking keyring...
-checking package integrity...
-loading package files...
-checking for file conflicts...
-checking available disk space...
-:: Processing package changes...
-installing vim-runtime...
-Optional dependencies for vim-runtime
-    sh: support for some tools and macros [installed]
-    python: demoserver example tool
-    gawk: mve tools upport [installed]
-installing gpm...
-installing vim...
-Optional dependencies for vim
-    python2: Python 2 language support
-    python: Python 3 language support
-    ruby: Ruby language support
-    lua: Lua language support
-    perl: Perl language support [installed]
-    tcl: Tcl language support
-:: Running post-transaction hooks...
-(1/2) Reloading system manager configuration...
-Running in chroot, ignoring request: daemon-reload
-(2/2) Arming ConditionNeedsUpdate...
 sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
-+sudo rm /tmp/genbootstrap.5M6NYr/root-bind/bin/setup-tasks.sh
++sudo rm /tmp/genbootstrap.lJWYyd/root-bind/bin/setup-tasks.sh
 sudo umount "${TMPDIR}"/root-bind
-+sudo umount /tmp/genbootstrap.5M6NYr/root-bind
++sudo umount /tmp/genbootstrap.lJWYyd/root-bind
 
 sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | gzip -9 > ${TMPDIR}/root.tar.gz)"
-+sudo sh -c '(cd /tmp/genbootstrap.5M6NYr/root; bsdtar -cf - * | gzip -9 > /tmp/genbootstrap.5M6NYr/root.tar.gz)'
-: tar format cannot archive socket: tar format cannot archive socket: tar format cannot archive socket: tar format cannot archive socketmv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
-+mv /tmp/genbootstrap.5M6NYr/root.tar.gz /home/travis/build/greyltc/archlinux-bootstrapper/root.tar.gz
-sudo rm -rf "${TMPDIR}"
-+sudo rm -rf /tmp/genbootstrap.5M6NYr
++sudo sh -c '(cd /tmp/genbootstrap.lJWYyd/root; bsdtar -cf - * | gzip -9 > /tmp/genbootstrap.lJWYyd/root.tar.gz)'
+: tar format cannot archive socket: tar format cannot archive socket: tar format cannot archive socket: tar format cannot archive socket
+mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root-wsl.tar.gz"
++mv /tmp/genbootstrap.lJWYyd/root.tar.gz /home/travis/build/greyltc/archlinux-bootstrapper/root-wsl.tar.gz
 
