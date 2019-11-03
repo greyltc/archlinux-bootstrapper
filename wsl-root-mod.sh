@@ -28,7 +28,7 @@ sed -i 's,# %wheel ALL=(ALL),%wheel ALL=(ALL),g' /etc/sudoers
 AUR_PACKAGES="linux-wsl"
 
 su -c "(cd; git clone https://aur.archlinux.org/fakeroot-tcp.git)" -s /bin/bash builder
-su -c "(cd; cd fakeroot-tcp; makepkg -Cfsi --needed --noconfirm)" -s /bin/bash builder
+su -c "(cd; cd fakeroot-tcp; yes | makepkg -Cfsi --needed --noconfirm)" -s /bin/bash builder
 su -c "(cd; rm -rf fakeroot-tcp)" -s /bin/bash builder
 
 su -c "(cd; git clone https://aur.archlinux.org/yay.git)" -s /bin/bash builder
