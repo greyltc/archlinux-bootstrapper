@@ -21,7 +21,7 @@ set -o verbose
 set -o xtrace
 rm .travis_key.txt .gh_token.txt .secrets.tar
 
-./make-root-tar.sh |& tee root-build.log
+. ./make-root-tar.sh |& tee root-build.log
 echo "${TMPDIR}"
 
 git add root-build.log
