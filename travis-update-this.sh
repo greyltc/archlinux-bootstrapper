@@ -13,8 +13,8 @@ git config user.email "travis@rob.ot"
 chmod 600 .travis_key.txt
 eval `ssh-agent -s`
 ssh-add .travis_key.txt
-unset -o xtrace
-unset -o verbose
+set +o xtrace
+set +o verbose
 local GH_TOKEN=`cat .gh_token.txt`
 # destroy their files
 set -o verbose
@@ -47,8 +47,8 @@ GH_USER=greyltc
 GH_PROJ=archlinux-bootstrapper
 GH_BRANCH=master
 GH_RELEASE="v${GH_TAG//-/.}"
-unset -o xtrace
-unset -o verbose
+set +o xtrace
+set +o verbose
 REL_RES="$(curl --data "{\"tag_name\": \"${GH_TAG}\",\"target_commitish\": \"${GH_BRANCH}\",\"name\": \"${GH_RELEASE}\",\"body\": \"Release of version ${GH_RELEASE/v/}\",\"draft\": false,\"prerelease\": false}" https://api.github.com/repos/${GH_USER}/${GH_PROJ}/releases?access_token=$GH_TOKEN)"
 set -o verbose
 set -o xtrace
