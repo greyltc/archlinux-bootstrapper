@@ -21,7 +21,6 @@ set -o verbose
 set -o xtrace
 rm .travis_key.txt .gh_token.txt .secrets.tar
 
-echo "${TMPDIR}"
 ./make-root-tar.sh |& tee root-build.log
 echo "${TMPDIR}"
 
