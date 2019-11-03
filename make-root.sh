@@ -70,13 +70,16 @@ curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/
 cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
 
-pacman -Syyu --needed --noconfirm sed pacman-contrib base
+pacman -Syyu --needed --noconfirm sed pacman-contrib base reflector
 
 LOCALE=en_US.UTF-8
 CHARSET=UTF-8
 sed -i "s,^#${LOCALE} ${CHARSET},${LOCALE} ${CHARSET},g" /etc/locale.gen
 localectl set-locale LANG=${LOCALE}
 locale-gen
+
+# fixup mirrors
+reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 # setup package building stuff
 groupadd builders
