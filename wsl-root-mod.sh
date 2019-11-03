@@ -11,6 +11,9 @@ CURDIR=$(pwd)
 
 echo ${TMPDIR}
 
+sudo mkdir -p "${TMPDIR}"/root-bind
+sudo mount --bind "${TMPDIR}"/root "${TMPDIR}"/root-bind
+
 cat > "${TMPDIR}"/setup-tasks.sh << "EOF"
 #!/usr/bin/env bash
 set -o pipefail
