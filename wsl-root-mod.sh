@@ -26,16 +26,17 @@ pacman -Syyu --needed --noconfirm base-devel git
 sed -i 's,# %wheel ALL=(ALL),%wheel ALL=(ALL),g' /etc/sudoers
 
 AUR_PACKAGES="linux-wsl"
-
+source /etc/profile.d/perlbin.sh
 su -c "(cd; git clone https://aur.archlinux.org/fakeroot-tcp.git)" -s /bin/bash builder
-su -c "(cd; cd fakeroot-tcp; yes | makepkg -Cfsi --needed --noconfirm)" -s /bin/bash builder
+su -c "(cd; cd fakeroot-tcp; source /etc/profile.d/perlbin.sh; makepkg -Cfs --needed --noconfirm)" -s /bin/bash builder
 su -c "(cd; rm -rf fakeroot-tcp)" -s /bin/bash builder
+su -c "(cd /var/cache/makepkg/pkg/; yes | pacman -U fakeroot-tcp*.pkg.tar.xz)" -s /bin/bash root
 
 su -c "(cd; git clone https://aur.archlinux.org/yay.git)" -s /bin/bash builder
 su -c "(cd; cd yay; makepkg -Cfsi --needed --noconfirm)" -s /bin/bash builder
 su -c "(cd; rm -rf yay)" -s /bin/bash builder
 
-su -c "(source /etc/profile.d/perlbin.sh; yay -Syyu --needed --noconfirm ${AUR_PACKAGES})" -s /bin/bash builder
+su -c "(yay -Syyu --needed --noconfirm ${AUR_PACKAGES})" -s /bin/bash builder
 
 # clean up
 rm -rf /home/builder/.cache/yay
@@ -49,8 +50,4 @@ sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
 sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
 sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
 sudo umount "${TMPDIR}"/root-bind
-
-sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > ${TMPDIR}/root.tar.gz)"
-
-mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root-wsl.tar.gz"
 

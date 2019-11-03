@@ -103,8 +103,8 @@ sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
 sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
 sudo umount "${TMPDIR}"/root-bind
 
-sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > ${TMPDIR}/root.tar.gz)"
-mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
+#sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > ${TMPDIR}/root.tar.gz)"
+#mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
 #sudo rm -rf "${TMPDIR}"
 echo ${TMPDIR} > TMPDIR
 
