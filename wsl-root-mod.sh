@@ -26,14 +26,14 @@ pacman -Syyu --needed --noconfirm base-devel git
 sed -i 's,# %wheel ALL=(ALL),%wheel ALL=(ALL),g' /etc/sudoers
 
 AUR_PACKAGES="linux-wsl"
-source /etc/profile.d/perlbin.sh
+
 su -c "(cd; git clone https://aur.archlinux.org/fakeroot-tcp.git)" -s /bin/bash builder
 su -c "(cd; cd fakeroot-tcp; source /etc/profile.d/perlbin.sh; makepkg -Cfs --needed --noconfirm)" -s /bin/bash builder
 su -c "(cd; rm -rf fakeroot-tcp)" -s /bin/bash builder
 su -c "(cd /var/cache/makepkg/pkg/; yes | pacman -U fakeroot-tcp*.pkg.tar.xz)" -s /bin/bash root
 
 su -c "(cd; git clone https://aur.archlinux.org/yay.git)" -s /bin/bash builder
-su -c "(cd; cd yay; makepkg -Cfsi --needed --noconfirm)" -s /bin/bash builder
+su -c "(cd; cd yay; unset GOROOT; makepkg -Cfsi --needed --noconfirm)" -s /bin/bash builder
 su -c "(cd; rm -rf yay)" -s /bin/bash builder
 
 su -c "(yay -Syyu --needed --noconfirm ${AUR_PACKAGES})" -s /bin/bash builder
