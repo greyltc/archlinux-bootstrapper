@@ -1,3 +1,4 @@
 .travis_key.txt
 .gh_token.txt
 .secrets.tar
+root.tar.gz

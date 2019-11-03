@@ -63,6 +63,6 @@ REL_ID=`echo ${REL_RES} | python3 -c 'import json,sys;print(json.load(sys.stdin)
 ASSET=root.tar.gz
 LABEL="Compressed root file system (with no kernel)"
 LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
-unset -o xtrace
-unset -o verbose
+set +o xtrace
+set +o verbose
 curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
