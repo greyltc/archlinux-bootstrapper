@@ -24,7 +24,7 @@ set -o xtrace
 
 pacman -Syyu --needed --noconfirm base-devel git po4a
 
-cd
+cd /root
 git clone https://aur.archlinux.org/fakeroot-tcp.git
 cd fakeroot-tcp
 makepkg -Cfis --needed --noconfirm

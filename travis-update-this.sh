@@ -22,11 +22,16 @@ set -o xtrace
 rm .travis_key.txt .gh_token.txt .secrets.tar
 
 ./make-root-tar.sh |& tee root-build.log
+git add root-build.log
+#git add root.tar.gz
 TMPDIR=$(cat TMPDIR)
 rm TMPDIR
-./wsl-root-mod.sh "${TMPDIR}"|& tee root-build.log
+#./wsl-root-mod.sh "${TMPDIR}"|& tee wsl-mod.log
+#git add wsl-mod.log
+#git add root-wsl.tar.gz
 
-git add root-build.log
+rm -rf "${TMPDIR}"
+
 #git add root.tar.gz
 
 GH_TAG="$(date -u -I)"
