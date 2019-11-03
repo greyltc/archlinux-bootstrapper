@@ -80,7 +80,9 @@ locale-gen
 
 # setup package building stuff
 groupadd builders
-useradd -m -G wheel builders -s /bin/bash builder
+useradd -m -s /bin/bash builder
+usermod -a -G wheel builder
+usermod -a -G builders builder
 MAKEPKG_BACKUP="/var/cache/makepkg/pkg"
 mkdir -p "${MAKEPKG_BACKUP}"
 chgrp builders "${MAKEPKG_BACKUP}"
