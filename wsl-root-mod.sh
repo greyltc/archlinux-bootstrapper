@@ -22,8 +22,20 @@ set -o nounset
 set -o verbose
 set -o xtrace
 
-touch poop
+pacman -Syyu --needed --noconfirm base-devel git po4a
 
+cd
+git clone https://aur.archlinux.org/fakeroot-tcp.git
+cd fakeroot-tcp
+makepkg -Cfis --needed --noconfirm
+rm -rf fakeroot-tcp
+
+git clone https://aur.archlinux.org/linux-wsl.git
+cd linux-wsl
+makepkg -Cfis --needed --noconfirm
+#rm -rf linux-wsl
+
+pacman -Rs --noconfirm base-devel git po4a
 EOF
 
 chmod +x "${TMPDIR}"/setup-tasks.sh
