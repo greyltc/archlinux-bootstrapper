@@ -23,14 +23,7 @@ set -o verbose
 set -o xtrace
 
 pacman -Syyu --needed --noconfirm base-devel git
-
-useradd -m -G wheel -s /bin/bash builder
 sed -i 's,# %wheel ALL=(ALL),%wheel ALL=(ALL),g' /etc/sudoers
-MAKEPKG_BACKUP="/var/cache/makepkg/pkg"
-mkdir -p "${MAKEPKG_BACKUP}"
-sed -i "s,^#PKGDEST=.*$,PKGDEST=${MAKEPKG_BACKUP},g" /etc/makepkg.conf
-sed -i 's,^#MAKEFLAGS=.*$,MAKEFLAGS="-j2",g' /etc/makepkg.conf
-PKGDEST=${MAKEPKG_BACKUP}
 
 AUR_PACKAGES="linux-wsl"
 

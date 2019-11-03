@@ -78,6 +78,16 @@ sed -i "s,^#${LOCALE} ${CHARSET},${LOCALE} ${CHARSET},g" /etc/locale.gen
 localectl set-locale LANG=${LOCALE}
 locale-gen
 
+# setup package building stuff
+groupadd builders
+useradd -m -G wheel builders -s /bin/bash builder
+MAKEPKG_BACKUP="/var/cache/makepkg/pkg"
+mkdir -p "${MAKEPKG_BACKUP}"
+chgrp builders "${MAKEPKG_BACKUP}"
+chmod g+w "${MAKEPKG_BACKUP}"
+sed -i "s,^#PKGDEST=.*$,PKGDEST=${MAKEPKG_BACKUP},g" /etc/makepkg.conf
+sed -i 's,^#MAKEFLAGS=.*$,MAKEFLAGS="-j2",g' /etc/makepkg.conf
+
 #sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
 #rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 
