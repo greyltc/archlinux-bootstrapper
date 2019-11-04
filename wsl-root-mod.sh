@@ -25,7 +25,7 @@ set -o xtrace
 pacman -Syyu --needed --noconfirm base-devel git
 sed -i 's,# %wheel ALL=(ALL),%wheel ALL=(ALL),g' /etc/sudoers
 
-AUR_PACKAGES="linux-wsl"
+AUR_PACKAGES="linux-wsl adduser-deb"
 
 su -c "(cd; git clone https://aur.archlinux.org/fakeroot-tcp.git)" -s /bin/bash builder
 su -c "(cd; cd fakeroot-tcp; source /etc/profile.d/perlbin.sh; makepkg -Cfs --needed --noconfirm)" -s /bin/bash builder
