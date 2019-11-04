@@ -33,6 +33,8 @@ sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > "${TRAVIS_BUILD_DIR}"
 ./wsl-root-mod.sh "${TMPDIR}"|& tee wsl-mod.log
 git add wsl-mod.log
 sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > "${TRAVIS_BUILD_DIR}"/root-wsl.tar.gz)"
+cp -a ${TMPDIR}/root/var/cache/makepkg/pkg/linux-wsl*.pkg.tar.xz .
+ln -s linux-wsl*.pkg.tar.xz linux-wsl.pkg.tar.xz
 #git add root-wsl.tar.gz
 
 sudo rm -rf "${TMPDIR}"
@@ -70,6 +72,13 @@ curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type
 
 ASSET=root-wsl.tar.gz
 LABEL="Compressed root fs (modded for WSL)"
+LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
+set +o xtrace
+set +o verbose
+curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
+
+ASSET=linux-wsl.pkg.tar.xz
+LABEL="Microsoft's WSL2 kernel package"
 LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
 set +o xtrace
 set +o verbose
