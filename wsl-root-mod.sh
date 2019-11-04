@@ -47,6 +47,24 @@ EOF
 chmod +x "${TMPDIR}"/setup-tasks.sh
 sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
 
+cat > "${TMPDIR}"/wsl-native-setup << "EOF"
+#!/usr/bin/env bash
+set -o pipefail
+set -o errexit
+set -o nounset
+#set -o verbose
+#set -o xtrace
+
+reflect-mirrors
+echo "Setting up keyring..."
+pacman-key --init
+pacman-key --populate archlinux
+echo "Updating software packages..."
+pacman -Syyu --noconfirm
+EOF
+chmod +x "${TMPDIR}"/wsl-native-setup
+sudo mv "${TMPDIR}"/wsl-native-setup "${TMPDIR}"/root-bind/usr/bin/wsl-native-setup
+
 sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
 sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
 sudo umount "${TMPDIR}"/root-bind
