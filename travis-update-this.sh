@@ -63,8 +63,8 @@ set -o verbose
 set -o xtrace
 REL_ID=`echo ${REL_RES} | python3 -c 'import json,sys;print(json.load(sys.stdin)["id"])'`
 
-ASSET=root.tar.gz
-LABEL="Compressed root file system (with no kernel)"
+ASSET=linux-wsl.pkg.tar.xz
+LABEL="Microsoft's WSL2 kernel package"
 LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
 set +o xtrace
 set +o verbose
@@ -82,8 +82,8 @@ set -o verbose
 set -o xtrace
 
 
-ASSET=linux-wsl.pkg.tar.xz
-LABEL="Microsoft's WSL2 kernel package"
+ASSET=root.tar.gz
+LABEL="Compressed root file system (with no kernel)"
 LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
 set +o xtrace
 set +o verbose
