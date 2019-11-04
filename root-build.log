@@ -5,7 +5,7 @@ CURDIR=$(pwd)
 +CURDIR=/home/travis/build/greyltc/archlinux-bootstrapper
 TMPDIR=$(mktemp -d /var/tmp/genbootstrap.XXXXXX)
 ++mktemp -d /var/tmp/genbootstrap.XXXXXX
-+TMPDIR=/var/tmp/genbootstrap.4qu4tN
++TMPDIR=/var/tmp/genbootstrap.ND9b5s
 
 build_root() {
   sudo mkdir -p "${TMPDIR}"/root
@@ -51,19 +51,19 @@ else
 fi
 +'[' -f /etc/arch-release ']'
 +fetch_root
-+pushd /var/tmp/genbootstrap.4qu4tN
-/var/tmp/genbootstrap.4qu4tN ~/build/greyltc/archlinux-bootstrapper
++pushd /var/tmp/genbootstrap.ND9b5s
+/var/tmp/genbootstrap.ND9b5s ~/build/greyltc/archlinux-bootstrapper
 +wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-2019-11-03 23:07:18 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
-2019-11-03 23:07:18 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
-2019-11-03 23:07:32 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz [163611443/163611443] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz" [1]
-2019-11-03 23:07:32 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig" [1]
-2019-11-03 23:07:32 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
-2019-11-03 23:07:32 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
-2019-11-03 23:07:32 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
-FINISHED --2019-11-03 23:07:32--
-Total wall clock time: 15s
-Downloaded: 7 files, 156M in 14s (11.0 MB/s)
+2019-11-04 00:16:34 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
+2019-11-04 00:16:34 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
+2019-11-04 00:17:00 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz [163611443/163611443] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz" [1]
+2019-11-04 00:17:00 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig" [1]
+2019-11-04 00:17:00 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
+2019-11-04 00:17:00 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
+2019-11-04 00:17:00 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
+FINISHED --2019-11-04 00:17:00--
+Total wall clock time: 26s
+Downloaded: 7 files, 156M in 26s (6.03 MB/s)
 +cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig .
 +gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
 gpg: keybox './vendors.gpg' created
@@ -72,9 +72,9 @@ gpg: key 7F2D434B9741E8AC: public key "Pierre Schmitz <pierre@archlinux.de>" imp
 gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
 gpg:               imported: 1
-+gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
 +sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p'
 +gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
++gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
 gpg: inserting ownertrust of 6
 gpg: inserting ownertrust of 6
 +gpg --trust-model always --no-default-keyring --keyring ./vendors.gpg --verify archlinux-bootstrap-2019.11.01-x86_64.tar.gz.sig
@@ -92,9 +92,9 @@ tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.security.capabil
 ~/build/greyltc/archlinux-bootstrapper
 
 sudo mkdir -p "${TMPDIR}"/root-bind
-+sudo mkdir -p /var/tmp/genbootstrap.4qu4tN/root-bind
++sudo mkdir -p /var/tmp/genbootstrap.ND9b5s/root-bind
 sudo mount --bind "${TMPDIR}"/root "${TMPDIR}"/root-bind
-+sudo mount --bind /var/tmp/genbootstrap.4qu4tN/root /var/tmp/genbootstrap.4qu4tN/root-bind
++sudo mount --bind /var/tmp/genbootstrap.ND9b5s/root /var/tmp/genbootstrap.ND9b5s/root-bind
 
 cat > "${TMPDIR}"/setup-tasks.sh << "EOF"
 #!/usr/bin/env bash
@@ -112,13 +112,18 @@ curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/
 cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
 
-pacman -Syyu --needed --noconfirm sed pacman-contrib base
+pacman -Syyu --needed --noconfirm sed pacman-contrib base reflector
 
 LOCALE=en_US.UTF-8
 CHARSET=UTF-8
 sed -i "s,^#${LOCALE} ${CHARSET},${LOCALE} ${CHARSET},g" /etc/locale.gen
 localectl set-locale LANG=${LOCALE}
 locale-gen
+
+# fixup mirrors
+echo -e '#!/usr/bin/env bash\nreflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist' > /usr/bin/reflect-mirrors
+chmod +x /usr/bin/reflect-mirrors
+reflect-mirrors
 
 # setup package building stuff
 groupadd builders
@@ -140,12 +145,12 @@ pacman -Syyu --needed --noconfirm vim
 EOF
 +cat
 chmod +x "${TMPDIR}"/setup-tasks.sh
-+chmod +x /var/tmp/genbootstrap.4qu4tN/setup-tasks.sh
++chmod +x /var/tmp/genbootstrap.ND9b5s/setup-tasks.sh
 sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
-+sudo mv /var/tmp/genbootstrap.4qu4tN/setup-tasks.sh /var/tmp/genbootstrap.4qu4tN/root-bind/usr/bin/setup-tasks.sh
++sudo mv /var/tmp/genbootstrap.ND9b5s/setup-tasks.sh /var/tmp/genbootstrap.ND9b5s/root-bind/usr/bin/setup-tasks.sh
 
 sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
-+sudo /var/tmp/genbootstrap.4qu4tN/root-bind/bin/arch-chroot /var/tmp/genbootstrap.4qu4tN/root-bind/ setup-tasks.sh
++sudo /var/tmp/genbootstrap.ND9b5s/root-bind/bin/arch-chroot /var/tmp/genbootstrap.ND9b5s/root-bind/ setup-tasks.sh
 bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 set -o xtrace
 
@@ -158,9 +163,9 @@ gpg: starting migration from earlier GnuPG versions
 gpg: porting secret keys from '/etc/pacman.d/gnupg/secring.gpg' to gpg-agent
 gpg: migration succeeded
 gpg: Generating pacman keyring master key...
-gpg: key F4BFAC2D1A5EE421 marked as ultimately trusted
+gpg: key AAAACE8CD011275F marked as ultimately trusted
 gpg: directory '/etc/pacman.d/gnupg/openpgp-revocs.d' created
-gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/82FA95A5A7279FAC6AC19AA9F4BFAC2D1A5EE421.rev'
+gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/FF74D4F75B47C95E6C03B7BAAAAACE8CD011275F.rev'
 gpg: Done
 ==> Updating trust database...
 gpg: marginals needed: 3  completes needed: 1  trust model: pgp
@@ -258,14 +263,14 @@ curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/
 + curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/all/https/
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 11594  100 11594    0     0  19784      0 --:--:-- --:--:-- --:--:-- 19751
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 11594  100 11594    0     0  19852      0 --:--:-- --:--:-- --:--:-- 19818100 11594  100 11594    0     0  19852      0 --:--:-- --:--:-- --:--:-- 19818
 cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 + cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
 + echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch'
 
-pacman -Syyu --needed --noconfirm sed pacman-contrib base
-+ pacman -Syyu --needed --noconfirm sed pacman-contrib base
+pacman -Syyu --needed --noconfirm sed pacman-contrib base reflector
++ pacman -Syyu --needed --noconfirm sed pacman-contrib base reflector
 :: Synchronizing package databases...
 downloading core.db...
 downloading extra.db...
@@ -274,11 +279,11 @@ downloading community.db...
 resolving dependencies...
 looking for conflicting packages...
 
-Packages (23) cryptsetup-2.2.2-1  fakeroot-1.24-1  file-5.37-3  gettext-0.20.1-2  grep-3.3-2  gzip-1.10-2  iana-etc-20191030-1  icu-64.2-1  iproute2-5.3.0-1  iputils-20190709-1  less-551-2  libcroco-0.6.13-1  libxml2-2.9.9-3  licenses-20191011-1  pacman-5.2.1-1  pciutils-3.6.2-1  procps-ng-3.3.15-1  psmisc-23.2-1  systemd-sysvcompat-243.78-1  tar-1.32-2  base-2-1  pacman-contrib-1.2.0-3  sed-4.7-2
+Packages (26) cryptsetup-2.2.2-1  fakeroot-1.24-1  file-5.37-3  gettext-0.20.1-2  grep-3.3-2  gzip-1.10-2  iana-etc-20191030-1  icu-64.2-1  iproute2-5.3.0-1  iputils-20190709-1  less-551-2  libcroco-0.6.13-1  libnsl-1.2.0-1  libxml2-2.9.9-3  licenses-20191011-1  pacman-5.2.1-1  pciutils-3.6.2-1  procps-ng-3.3.15-1  psmisc-23.2-1  python-3.7.4-2  systemd-sysvcompat-243.78-1  tar-1.32-2  base-2-1  pacman-contrib-1.2.0-3  reflector-2019.10-1  sed-4.7-2
 
-Total Download Size:   16.76 MiB
-Total Installed Size:  80.29 MiB
-Net Upgrade Size:      69.85 MiB
+Total Download Size:    50.93 MiB
+Total Installed Size:  225.46 MiB
+Net Upgrade Size:      215.02 MiB
 
 :: Proceed with installation? [Y/n] 
 :: Retrieving packages...
@@ -302,9 +307,12 @@ downloading systemd-sysvcompat-243.78-1-x86_64.pkg.tar.xz...
 downloading iputils-20190709-1-x86_64.pkg.tar.xz...
 downloading iproute2-5.3.0-1-x86_64.pkg.tar.xz...
 downloading base-2-1-any.pkg.tar.xz...
+downloading libnsl-1.2.0-1-x86_64.pkg.tar.xz...
 downloading libxml2-2.9.9-3-x86_64.pkg.tar.xz...
 downloading libcroco-0.6.13-1-x86_64.pkg.tar.xz...
+downloading python-3.7.4-2-x86_64.pkg.tar.xz...
 downloading pacman-contrib-1.2.0-3-x86_64.pkg.tar.xz...
+downloading reflector-2019.10-1-any.pkg.tar.xz...
 checking keyring...
 checking package integrity...
 loading package files...
@@ -347,6 +355,18 @@ Optional dependencies for iproute2
 installing base...
 Optional dependencies for base
     linux: bare metal support
+installing libnsl...
+installing python...
+Optional dependencies for python
+    python-setuptools
+    python-pip
+    sqlite [installed]
+    mpdecimal: for decimal
+    xz: for lzma [installed]
+    tk: for tkinter
+installing reflector...
+Optional dependencies for reflector
+    rsync: rate rsync mirrors
 :: Running post-transaction hooks...
 (1/3) Reloading system manager configuration...
 /bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
@@ -370,6 +390,14 @@ locale-gen
 Generating locales...
   en_US.UTF-8... done
 Generation complete.
+
+# fixup mirrors
+echo -e '#!/usr/bin/env bash\nreflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist' > /usr/bin/reflect-mirrors
++ echo -e '#!/usr/bin/env bash\nreflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
+chmod +x /usr/bin/reflect-mirrors
++ chmod +x /usr/bin/reflect-mirrors
+reflect-mirrors
++ reflect-mirrors
 
 # setup package building stuff
 groupadd builders
@@ -426,13 +454,13 @@ checking available disk space...
 installing vim-runtime...
 Optional dependencies for vim-runtime
     sh: support for some tools and macros [installed]
-    python: demoserver example tool
+    python: demoserver example tool [installed]
     gawk: mve tools upport [installed]
 installing gpm...
 installing vim...
 Optional dependencies for vim
     python2: Python 2 language support
-    python: Python 3 language support
+    python: Python 3 language support [installed]
     ruby: Ruby language support
     lua: Lua language support
     perl: Perl language support [installed]
@@ -442,13 +470,13 @@ Optional dependencies for vim
 Running in chroot, ignoring request: daemon-reload
 (2/2) Arming ConditionNeedsUpdate...
 sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
-+sudo rm /var/tmp/genbootstrap.4qu4tN/root-bind/bin/setup-tasks.sh
++sudo rm /var/tmp/genbootstrap.ND9b5s/root-bind/bin/setup-tasks.sh
 sudo umount "${TMPDIR}"/root-bind
-+sudo umount /var/tmp/genbootstrap.4qu4tN/root-bind
++sudo umount /var/tmp/genbootstrap.ND9b5s/root-bind
 
 #sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > ${TMPDIR}/root.tar.gz)"
 #mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
 #sudo rm -rf "${TMPDIR}"
 echo ${TMPDIR} > TMPDIR
-+echo /var/tmp/genbootstrap.4qu4tN
++echo /var/tmp/genbootstrap.ND9b5s
 
