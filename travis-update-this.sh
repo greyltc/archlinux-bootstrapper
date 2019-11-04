@@ -34,8 +34,9 @@ sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > "${TRAVIS_BUILD_DIR}"
 git add wsl-mod.log
 sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > "${TRAVIS_BUILD_DIR}"/root-wsl.tar.gz)"
 cp -a "${TMPDIR}"/root/var/cache/makepkg/pkg/linux-wsl* .
-ln -s linux-wsl* linux-wsl.pkg.tar.xz
+cp -a linux-wsl* linux-wsl.pkg.tar.xz
 #git add root-wsl.tar.gz
+#git add linux-wsl.pkg.tar.xz
 
 sudo rm -rf "${TMPDIR}"
 
@@ -65,7 +66,7 @@ REL_ID=`echo ${REL_RES} | python3 -c 'import json,sys;print(json.load(sys.stdin)
 
 ASSET=linux-wsl.pkg.tar.xz
 LABEL="Microsoft's WSL2 kernel package"
-LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
+LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote(\"$LABEL\"))")
 set +o xtrace
 set +o verbose
 curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
@@ -74,7 +75,7 @@ set -o xtrace
 
 ASSET=root-wsl.tar.gz
 LABEL="Compressed root fs (modded for WSL)"
-LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
+LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote(\"$LABEL\"))")
 set +o xtrace
 set +o verbose
 curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
@@ -84,7 +85,7 @@ set -o xtrace
 
 ASSET=root.tar.gz
 LABEL="Compressed root file system (with no kernel)"
-LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$LABEL'))")
+LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote(\"$LABEL\"))")
 set +o xtrace
 set +o verbose
 curl -H "Authorization: token $GH_TOKEN" -H "Content-Type: $(file -b --mime-type $ASSET)" --data-binary @$ASSET "https://uploads.github.com/repos/${GH_USER}/${GH_PROJ}/releases/${REL_ID}/assets?name=${ASSET}&label=${LABEL_ESC}"
