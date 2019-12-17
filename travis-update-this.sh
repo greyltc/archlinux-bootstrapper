@@ -93,7 +93,7 @@ set -o verbose
 set -o xtrace
 
 ASSET=root.tar.gz
-LABEL="Compressed root file system (with no kernel)"
+LABEL="Compressed root file system, unmodded with no kernel."
 LABEL_ESC=$(python3 -c "import urllib.parse; print(urllib.parse.quote(\"$LABEL\"))")
 set +o xtrace
 set +o verbose
