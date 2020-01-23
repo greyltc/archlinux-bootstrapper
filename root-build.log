@@ -5,7 +5,7 @@ CURDIR=$(pwd)
 +CURDIR=/home/travis/build/greyltc/archlinux-bootstrapper
 TMPDIR=$(mktemp -d /var/tmp/genbootstrap.XXXXXX)
 ++mktemp -d /var/tmp/genbootstrap.XXXXXX
-+TMPDIR=/var/tmp/genbootstrap.voo8XY
++TMPDIR=/var/tmp/genbootstrap.5jEeRT
 
 build_root() {
   sudo mkdir -p "${TMPDIR}"/root
@@ -51,19 +51,19 @@ else
 fi
 +'[' -f /etc/arch-release ']'
 +fetch_root
-+pushd /var/tmp/genbootstrap.voo8XY
-/var/tmp/genbootstrap.voo8XY ~/build/greyltc/archlinux-bootstrapper
++pushd /var/tmp/genbootstrap.5jEeRT
+/var/tmp/genbootstrap.5jEeRT ~/build/greyltc/archlinux-bootstrapper
 +wget --continue -nv -e robots=off -r --no-parent -A 'archlinux-bootstrap-*' https://mirrors.edge.kernel.org/archlinux/iso/latest/
-2020-01-16 16:47:53 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
-2020-01-16 16:47:53 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
-2020-01-16 16:47:54 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz [163837697/163837697] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz" [1]
-2020-01-16 16:47:54 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz.sig" [1]
-2020-01-16 16:47:54 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
-2020-01-16 16:47:54 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
-2020-01-16 16:47:54 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
-FINISHED --2020-01-16 16:47:54--
-Total wall clock time: 1.4s
-Downloaded: 7 files, 156M in 1.1s (137 MB/s)
+2020-01-23 16:48:14 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/ [1146] -> "mirrors.edge.kernel.org/archlinux/iso/latest/index.html.tmp" [1]
+2020-01-23 16:48:14 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/ [385] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/index.html.tmp" [1]
+2020-01-23 16:48:36 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz [163837697/163837697] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz" [1]
+2020-01-23 16:48:36 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz.sig [310/310] -> "mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz.sig" [1]
+2020-01-23 16:48:36 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/ [850] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/index.html.tmp" [1]
+2020-01-23 16:48:36 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/ [523] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/x86_64/index.html.tmp" [1]
+2020-01-23 16:48:36 URL:https://mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/ [637] -> "mirrors.edge.kernel.org/archlinux/iso/latest/arch/boot/x86_64/index.html.tmp" [1]
+FINISHED --2020-01-23 16:48:36--
+Total wall clock time: 23s
+Downloaded: 7 files, 156M in 22s (6.98 MB/s)
 +cp mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz mirrors.edge.kernel.org/archlinux/iso/latest/archlinux-bootstrap-2020.01.01-x86_64.tar.gz.sig .
 +gpg --no-default-keyring --keyring ./vendors.gpg --keyserver keyserver.ubuntu.com --recv-keys 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
 gpg: keybox './vendors.gpg' created
@@ -73,9 +73,9 @@ gpg: key 7F2D434B9741E8AC: public key "Pierre Schmitz <pierre@archlinux.de>" imp
 gpg: no ultimately trusted keys found
 gpg: Total number processed: 1
 gpg:               imported: 1
++gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
 +sed -E -n -e 's/^fpr:::::::::([0-9A-F]+):$/\1:6:/p'
 +gpg --no-default-keyring --keyring ./vendors.gpg --import-ownertrust
-+gpg --no-default-keyring --keyring ./vendors.gpg --list-keys --fingerprint --with-colons
 gpg: inserting ownertrust of 6
 gpg: inserting ownertrust of 6
 +gpg --trust-model always --no-default-keyring --keyring ./vendors.gpg --verify archlinux-bootstrap-2020.01.01-x86_64.tar.gz.sig
@@ -93,9 +93,9 @@ tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.security.capabil
 ~/build/greyltc/archlinux-bootstrapper
 
 sudo mkdir -p "${TMPDIR}"/root-bind
-+sudo mkdir -p /var/tmp/genbootstrap.voo8XY/root-bind
++sudo mkdir -p /var/tmp/genbootstrap.5jEeRT/root-bind
 sudo mount --bind "${TMPDIR}"/root "${TMPDIR}"/root-bind
-+sudo mount --bind /var/tmp/genbootstrap.voo8XY/root /var/tmp/genbootstrap.voo8XY/root-bind
++sudo mount --bind /var/tmp/genbootstrap.5jEeRT/root /var/tmp/genbootstrap.5jEeRT/root-bind
 
 cat > "${TMPDIR}"/setup-tasks.sh << "EOF"
 #!/usr/bin/env bash
@@ -146,12 +146,12 @@ pacman -Syyu --needed --noconfirm vim
 EOF
 +cat
 chmod +x "${TMPDIR}"/setup-tasks.sh
-+chmod +x /var/tmp/genbootstrap.voo8XY/setup-tasks.sh
++chmod +x /var/tmp/genbootstrap.5jEeRT/setup-tasks.sh
 sudo mv "${TMPDIR}"/setup-tasks.sh "${TMPDIR}"/root-bind/usr/bin/setup-tasks.sh
-+sudo mv /var/tmp/genbootstrap.voo8XY/setup-tasks.sh /var/tmp/genbootstrap.voo8XY/root-bind/usr/bin/setup-tasks.sh
++sudo mv /var/tmp/genbootstrap.5jEeRT/setup-tasks.sh /var/tmp/genbootstrap.5jEeRT/root-bind/usr/bin/setup-tasks.sh
 
 sudo "${TMPDIR}"/root-bind/bin/arch-chroot "${TMPDIR}"/root-bind/ setup-tasks.sh
-+sudo /var/tmp/genbootstrap.voo8XY/root-bind/bin/arch-chroot /var/tmp/genbootstrap.voo8XY/root-bind/ setup-tasks.sh
++sudo /var/tmp/genbootstrap.5jEeRT/root-bind/bin/arch-chroot /var/tmp/genbootstrap.5jEeRT/root-bind/ setup-tasks.sh
 bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 set -o xtrace
 
@@ -164,9 +164,9 @@ gpg: starting migration from earlier GnuPG versions
 gpg: porting secret keys from '/etc/pacman.d/gnupg/secring.gpg' to gpg-agent
 gpg: migration succeeded
 gpg: Generating pacman keyring master key...
-gpg: key 980B33E9419CC84C marked as ultimately trusted
+gpg: key F14F24C86028E7BA marked as ultimately trusted
 gpg: directory '/etc/pacman.d/gnupg/openpgp-revocs.d' created
-gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/D3691F8FC80907D3B06AC1FF980B33E9419CC84C.rev'
+gpg: revocation certificate stored as '/etc/pacman.d/gnupg/openpgp-revocs.d/7705652020B6CA2785162536F14F24C86028E7BA.rev'
 gpg: Done
 ==> Updating trust database...
 gpg: marginals needed: 3  completes needed: 1  trust model: pgp
@@ -264,7 +264,7 @@ curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/
 + curl -L -o /etc/pacman.d/mirrorlist.backup https://www.archlinux.org/mirrorlist/all/https/
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 11550  100 11550    0     0  26131      0 --:--:-- --:--:-- --:--:-- 26072
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 11550  100 11550    0     0  24785      0 --:--:-- --:--:-- --:--:-- 24732
 cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 + cp /etc/pacman.d/mirrorlist.backup /etc/pacman.d/mirrorlist
 echo 'Server = https://mirror.rackspace.com/archlinux/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
@@ -280,18 +280,20 @@ downloading community.db...
 resolving dependencies...
 looking for conflicting packages...
 
-Packages (34) archlinux-keyring-20200108-1  ca-certificates-mozilla-3.49.1-1  curl-7.68.0-1  device-mapper-2.02.186-5  e2fsprogs-1.45.5-1  fakeroot-1.24-2  file-5.38-1  gettext-0.20.1-3  grep-3.4-1  gzip-1.10-3  iana-etc-20191231-1  icu-65.1-2  iproute2-5.4.0-2  iptables-1:1.8.4-1  iputils-20190709-2  less-551-3  libarchive-3.4.1-1  libcap-2.29-1  libcroco-0.6.13-1  libnsl-1.2.0-2  libxml2-2.9.10-1  licenses-20191011-2  pacman-5.2.1-4  pacman-mirrorlist-20200103-1  pciutils-3.6.2-2  procps-ng-3.3.15-2  psmisc-23.3-2  python-3.8.1-3  systemd-sysvcompat-244.1-1  tar-1.32-3  base-2-2  pacman-contrib-1.3.0-1  reflector-2019.10-2  sed-4.8-1
+Packages (36) archlinux-keyring-20200108-1  ca-certificates-mozilla-3.49.1-1  curl-7.68.0-1  device-mapper-2.02.186-5  e2fsprogs-1.45.5-1  fakeroot-1.24-2  file-5.38-1  gettext-0.20.1-3  grep-3.4-1  gzip-1.10-3  iana-etc-20191231-1  icu-65.1-2  iproute2-5.4.0-2  iptables-1:1.8.4-1  iputils-20190709-2  less-551-3  libarchive-3.4.1-1  libcap-2.29-1  libcroco-0.6.13-1  libnsl-1.2.0-2  libutil-linux-2.35-1  libxml2-2.9.10-1  licenses-20191011-2  pacman-5.2.1-4  pacman-mirrorlist-20200103-1  pciutils-3.6.2-2  procps-ng-3.3.15-2  psmisc-23.3-2  python-3.8.1-3  systemd-sysvcompat-244.1-1  tar-1.32-3  util-linux-2.35-1  base-2-2  pacman-contrib-1.3.0-1  reflector-2019.10-2  sed-4.8-1
 
-Total Download Size:    51.26 MiB
-Total Installed Size:  171.90 MiB
-Net Upgrade Size:      150.66 MiB
+Total Download Size:    54.06 MiB
+Total Installed Size:  186.20 MiB
+Net Upgrade Size:      151.23 MiB
 
 :: Proceed with installation? [Y/n] 
 :: Retrieving packages...
 downloading iana-etc-20191231-1-any.pkg.tar.zst...
 downloading sed-4.8-1-x86_64.pkg.tar.zst...
+downloading libutil-linux-2.35-1-x86_64.pkg.tar.zst...
 downloading libcap-2.29-1-x86_64.pkg.tar.xz...
 downloading e2fsprogs-1.45.5-1-x86_64.pkg.tar.zst...
+downloading util-linux-2.35-1-x86_64.pkg.tar.zst...
 downloading fakeroot-1.24-2-x86_64.pkg.tar.xz...
 downloading libarchive-3.4.1-1-x86_64.pkg.tar.zst...
 downloading iptables-1:1.8.4-1-x86_64.pkg.tar.zst...
@@ -330,8 +332,10 @@ checking available disk space...
 :: Processing package changes...
 upgrading iana-etc...
 installing sed...
+upgrading libutil-linux...
 upgrading libcap...
 upgrading e2fsprogs...
+upgrading util-linux...
 installing fakeroot...
 /usr/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 upgrading libarchive...
@@ -434,15 +438,17 @@ installing reflector...
 Optional dependencies for reflector
     rsync: rate rsync mirrors
 :: Running post-transaction hooks...
-(1/4) Reloading system manager configuration...
+(1/5) Creating system user accounts...
+/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+(2/5) Reloading system manager configuration...
 /bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 Running in chroot, ignoring request: daemon-reload
-(2/4) Reloading device manager configuration...
+(3/5) Reloading device manager configuration...
 /bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 Running in chroot, ignoring request.
-(3/4) Arming ConditionNeedsUpdate...
+(4/5) Arming ConditionNeedsUpdate...
 /bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
-(4/4) Rebuilding certificate stores...
+(5/5) Rebuilding certificate stores...
 /bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
 
 LOCALE=en_US.UTF-8
@@ -468,407 +474,407 @@ chmod +x /usr/bin/reflect-mirrors
 reflect-mirrors
 + reflect-mirrors
 Optimizing mirrorlist (this may take a few minutes)...
-[2020-01-16 16:48:24] INFO: rating http://mirror.chaoticum.net/arch/
-[2020-01-16 16:48:24] INFO: rating https://mirror.chaoticum.net/arch/
-[2020-01-16 16:48:24] INFO: rating https://ger.mirror.pkgbuild.com/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.mailtunnel.eu/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.mailtunnel.eu/
-[2020-01-16 16:48:24] INFO: rating http://ftp.sh.cvut.cz/arch/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.uk.mirror.allworldit.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.uk.mirror.allworldit.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.beccacervello.it/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.halifax.rwth-aachen.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.n-ix.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.neusoft.edu.cn/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://arch.mirror.constant.com/
-[2020-01-16 16:48:24] INFO: rating https://mirror.dc02.hackingand.coffee/arch/
-[2020-01-16 16:48:24] INFO: rating http://mirror.pseudoform.org/
-[2020-01-16 16:48:24] INFO: rating https://mirror.pseudoform.org/
-[2020-01-16 16:48:24] INFO: rating http://mirror.lty.me/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://arch.jensgutermuth.de/
-[2020-01-16 16:48:24] INFO: rating https://arch.jensgutermuth.de/
-[2020-01-16 16:48:24] INFO: rating https://ind.mirror.pkgbuild.com/
-[2020-01-16 16:48:24] INFO: rating https://jpn.mirror.pkgbuild.com/
-[2020-01-16 16:48:24] INFO: rating https://sgp.mirror.pkgbuild.com/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.uni-plovdiv.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.uni-plovdiv.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://arch.mirror.far.fi/
-[2020-01-16 16:48:24] INFO: rating http://mirror.f4st.host/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.f4st.host/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.dynamict.se/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.dynamict.se/
-[2020-01-16 16:48:24] INFO: rating https://mirror.osbeck.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.ams1.nl.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.fra10.de.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.sfo12.us.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.wdc1.us.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.ams1.nl.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.fra10.de.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.sfo12.us.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.wdc1.us.leaseweb.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://arch.mirror.constant.com/
-[2020-01-16 16:48:24] INFO: rating https://mirror.lty.me/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://pkg.adfinis-sygroup.ch/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://pkg.adfinis-sygroup.ch/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.sh.cvut.cz/arch/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.ip-connect.vn.ua/
-[2020-01-16 16:48:24] INFO: rating http://arch.mirror.square-r00t.net/
-[2020-01-16 16:48:24] INFO: rating https://arch.mirror.square-r00t.net/
-[2020-01-16 16:48:24] INFO: rating http://packages.oth-regensburg.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://packages.oth-regensburg.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.rezopole.net/
-[2020-01-16 16:48:24] INFO: rating https://mirror.dkm.cz/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://ftp.myrveln.se/pub/linux/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.cyberbits.eu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.cyberbits.eu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.bethselamin.de/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.niyawe.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.niyawe.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.thaller.ws/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.thaller.ws/
-[2020-01-16 16:48:24] INFO: rating http://mirror.oldsql.cc/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.oldsql.cc/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.csclub.uwaterloo.ca/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.csclub.uwaterloo.ca/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.dc02.hackingand.coffee/arch/
-[2020-01-16 16:48:24] INFO: rating http://mirror.sergal.org/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.sergal.org/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.ubrco.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.ubrco.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.mirror.ba/
-[2020-01-16 16:48:24] INFO: rating http://mirror.one.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.one.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.lug.mtu.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.lug.mtu.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.orbit-os.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.orbit-os.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.smith.geek.nz/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.smith.geek.nz/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.fsmg.org.nz/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.fsmg.org.nz/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://repo.ialab.dsu.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.mirror.liquidtelecom.com/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.mirror.liquidtelecom.com/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.eric.ovh/arch/
-[2020-01-16 16:48:24] INFO: rating https://archlinux.mivzakim.net/
-[2020-01-16 16:48:24] INFO: rating http://mirror.neuf.no/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.neuf.no/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.cqu.edu.cn/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.cqu.edu.cn/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.wtnet.de/arch/
-[2020-01-16 16:48:24] INFO: rating https://mirror.wtnet.de/arch/
-[2020-01-16 16:48:24] INFO: rating http://mirror.xeonbd.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.nxthost.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.nxthost.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.honkgong.info/
-[2020-01-16 16:48:24] INFO: rating http://ftp.fau.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.fau.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.nic.cz/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.23media.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.23media.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.m247.ro/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.ufscar.br/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.veriteknik.net.tr/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://shadow.ind.ntou.edu.tw/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.rise.ph/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://iad.mirrors.misaka.one/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://iad.mirrors.misaka.one/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.celianvdb.fr/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.celianvdb.fr/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.dotsrc.org/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://nova.quantum-mirror.hu/mirrors/pub/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://quantum-mirror.hu/mirrors/pub/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://quantum-mirror.hu/mirrors/pub/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://super.quantum-mirror.hu/mirrors/pub/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://arch.petarmaric.com/
-[2020-01-16 16:48:24] INFO: rating http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.cloroformo.org/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://reflector.luehm.com/arch/
-[2020-01-16 16:48:24] INFO: rating https://reflector.luehm.com/arch/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.ip-connect.vn.ua/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.mirror.pcextreme.nl/
-[2020-01-16 16:48:24] INFO: rating http://ftp.acc.umu.se/mirror/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.acc.umu.se/mirror/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://ftpmirror.infania.net/mirror/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.ukfast.co.uk/sites/archlinux.org/
-[2020-01-16 16:48:24] INFO: rating http://mirror.mikrogravitation.org/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.mikrogravitation.org/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.netcologne.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.thekinrar.fr/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.spline.inf.fu-berlin.de/mirrors/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.ps.kz/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.bytemark.co.uk/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://tux.rainside.sk/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.digitalnova.at/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.cedille.club/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.pidginhost.com/arch/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.pidginhost.com/arch/
-[2020-01-16 16:48:24] INFO: rating http://arch.eckner.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://arch.eckner.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://ftp.icm.edu.pl/pub/Linux/dist/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.icm.edu.pl/pub/Linux/dist/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.yandex.ru/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.srv.fail/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.puzzle.ch/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.puzzle.ch/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://dfw.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://hkg.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://iad.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://lon.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://ord.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://dfw.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://hkg.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://iad.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ord.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://syd.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://syd.mirror.rackspace.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.lzu.edu.cn/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.mirohost.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.mirohost.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://dist-mirror.fem.tu-ilmenau.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.premi.st/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.manchester.m247.com/arch-linux/
-[2020-01-16 16:48:24] INFO: rating http://arch.midov.pl/arch/
-[2020-01-16 16:48:24] INFO: rating http://archimonde.ts.si/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://archimonde.ts.si/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.reisenbauer.ee/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.reisenbauer.ee/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://arch.unixpeople.org/
-[2020-01-16 16:48:24] INFO: rating http://mirror.xtom.com.hk/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.xtom.com.hk/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.cat.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.cat.net/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.xtom.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.xtom.com/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.rit.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://ftp.swin.edu.au/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.ocf.berkeley.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.ocf.berkeley.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.arizona.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.arizona.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://ftp.jaist.ac.jp/pub/Linux/ArchLinux/
-[2020-01-16 16:48:24] INFO: rating http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.united-gameserver.de/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.system.is/arch/
-[2020-01-16 16:48:24] INFO: rating https://mirror.system.is/arch/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.acm.wpi.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.gnomus.de/
-[2020-01-16 16:48:24] INFO: rating http://archlinux.iskon.hr/
-[2020-01-16 16:48:24] INFO: rating http://mirror.cs.pitt.edu/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.t-home.mk/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.t-home.mk/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.metalgamer.eu/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.metalgamer.eu/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.neostrada.nl/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.neostrada.nl/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirror.ufro.cl/archlinux/
-[2020-01-16 16:48:24] INFO: rating http://mirrors.xtom.nl/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirrors.xtom.nl/archlinux/
-[2020-01-16 16:48:24] INFO: rating https://mirror.wormhole.eu/archlinux/
-[2020-01-16 16:49:00] INFO: Server                                                            Rate       Time
-[2020-01-16 16:49:00] INFO: http://archlinux.mailtunnel.eu/                           484.59 KiB/s     0.28 s
-[2020-01-16 16:49:00] INFO: http://mirror.chaoticum.net/arch/                         439.26 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: https://archlinux.mailtunnel.eu/                          716.72 KiB/s     0.19 s
-[2020-01-16 16:49:00] INFO: https://mirror.chaoticum.net/arch/                        432.57 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: https://ger.mirror.pkgbuild.com/                          693.85 KiB/s     0.19 s
-[2020-01-16 16:49:00] INFO: http://archlinux.uk.mirror.allworldit.com/archlinux/      480.36 KiB/s     0.28 s
-[2020-01-16 16:49:00] INFO: http://ftp.sh.cvut.cz/arch/                               422.35 KiB/s     0.32 s
-[2020-01-16 16:49:00] INFO: https://archlinux.beccacervello.it/archlinux/             503.15 KiB/s     0.27 s
-[2020-01-16 16:49:00] INFO: https://archlinux.uk.mirror.allworldit.com/archlinux/     731.49 KiB/s     0.18 s
-[2020-01-16 16:49:00] INFO: https://ftp.halifax.rwth-aachen.de/archlinux/             666.77 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: https://arch.mirror.constant.com/                        2401.12 KiB/s     0.06 s
-[2020-01-16 16:49:00] INFO: https://mirror.dc02.hackingand.coffee/arch/              1093.29 KiB/s     0.12 s
-[2020-01-16 16:49:00] INFO: https://mirrors.n-ix.net/archlinux/                       687.90 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: http://mirror.lty.me/archlinux/                           633.40 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://mirror.pseudoform.org/                            546.27 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: http://arch.jensgutermuth.de/                             445.97 KiB/s     0.30 s
-[2020-01-16 16:49:00] INFO: http://mirror.pseudoform.org/                             546.18 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: https://arch.jensgutermuth.de/                            667.16 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: https://mirrors.neusoft.edu.cn/archlinux/                 196.64 KiB/s     0.69 s
-[2020-01-16 16:49:00] INFO: http://mirrors.uni-plovdiv.net/archlinux/                 330.76 KiB/s     0.41 s
-[2020-01-16 16:49:00] INFO: https://jpn.mirror.pkgbuild.com/                          443.90 KiB/s     0.30 s
-[2020-01-16 16:49:00] INFO: https://ind.mirror.pkgbuild.com/                          264.76 KiB/s     0.51 s
-[2020-01-16 16:49:00] INFO: https://mirrors.uni-plovdiv.net/archlinux/                494.11 KiB/s     0.27 s
-[2020-01-16 16:49:00] INFO: https://sgp.mirror.pkgbuild.com/                          284.20 KiB/s     0.48 s
-[2020-01-16 16:49:00] INFO: http://mirror.f4st.host/archlinux/                        439.95 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: https://mirror.osbeck.com/archlinux/                     5106.65 KiB/s     0.03 s
-[2020-01-16 16:49:00] INFO: https://mirror.f4st.host/archlinux/                       603.90 KiB/s     0.22 s
-[2020-01-16 16:49:00] INFO: http://archlinux.dynamict.se/                             375.08 KiB/s     0.36 s
-[2020-01-16 16:49:00] INFO: http://mirror.ams1.nl.leaseweb.net/archlinux/             452.12 KiB/s     0.30 s
-[2020-01-16 16:49:00] INFO: http://arch.mirror.far.fi/                                123.72 KiB/s     1.09 s
-[2020-01-16 16:49:00] INFO: http://mirror.wdc1.us.leaseweb.net/archlinux/            1454.56 KiB/s     0.09 s
-[2020-01-16 16:49:00] INFO: https://archlinux.dynamict.se/                            541.57 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: http://mirror.fra10.de.leaseweb.net/archlinux/            435.16 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: http://mirror.sfo12.us.leaseweb.net/archlinux/            434.98 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: http://arch.mirror.constant.com/                         2201.41 KiB/s     0.06 s
-[2020-01-16 16:49:00] INFO: https://mirror.wdc1.us.leaseweb.net/archlinux/           2533.32 KiB/s     0.05 s
-[2020-01-16 16:49:00] INFO: https://mirror.sfo12.us.leaseweb.net/archlinux/           842.24 KiB/s     0.16 s
-[2020-01-16 16:49:00] INFO: https://mirror.ams1.nl.leaseweb.net/archlinux/            691.12 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: https://mirror.fra10.de.leaseweb.net/archlinux/           654.13 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://mirror.lty.me/archlinux/                          943.75 KiB/s     0.14 s
-[2020-01-16 16:49:00] INFO: http://arch.mirror.square-r00t.net/                      2305.03 KiB/s     0.06 s
-[2020-01-16 16:49:00] INFO: http://pkg.adfinis-sygroup.ch/archlinux/                  416.80 KiB/s     0.32 s
-[2020-01-16 16:49:00] INFO: https://arch.mirror.square-r00t.net/                     3410.30 KiB/s     0.04 s
-[2020-01-16 16:49:00] INFO: https://pkg.adfinis-sygroup.ch/archlinux/                 622.26 KiB/s     0.22 s
-[2020-01-16 16:49:00] INFO: https://ftp.sh.cvut.cz/arch/                              636.38 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: http://packages.oth-regensburg.de/archlinux/              423.35 KiB/s     0.32 s
-[2020-01-16 16:49:00] INFO: http://archlinux.rezopole.net/                            471.69 KiB/s     0.29 s
-[2020-01-16 16:49:00] INFO: https://archlinux.ip-connect.vn.ua/                       517.69 KiB/s     0.26 s
-[2020-01-16 16:49:00] INFO: https://packages.oth-regensburg.de/archlinux/             648.90 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://mirror.dkm.cz/archlinux/                          583.49 KiB/s     0.23 s
-[2020-01-16 16:49:00] INFO: http://mirror.cyberbits.eu/archlinux/                     502.97 KiB/s     0.27 s
-[2020-01-16 16:49:00] INFO: http://ftp.myrveln.se/pub/linux/archlinux/                357.72 KiB/s     0.38 s
-[2020-01-16 16:49:00] INFO: https://mirror.cyberbits.eu/archlinux/                    748.45 KiB/s     0.18 s
-[2020-01-16 16:49:00] INFO: http://mirrors.niyawe.de/archlinux/                       362.54 KiB/s     0.37 s
-[2020-01-16 16:49:00] INFO: https://mirror.bethselamin.de/                            657.97 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://mirrors.niyawe.de/archlinux/                      406.96 KiB/s     0.33 s
-[2020-01-16 16:49:00] INFO: http://mirror.csclub.uwaterloo.ca/archlinux/             1235.72 KiB/s     0.11 s
-[2020-01-16 16:49:00] INFO: http://archlinux.thaller.ws/                              333.25 KiB/s     0.41 s
-[2020-01-16 16:49:00] INFO: https://archlinux.thaller.ws/                             329.93 KiB/s     0.41 s
-[2020-01-16 16:49:00] INFO: http://mirror.oldsql.cc/archlinux/                        458.37 KiB/s     0.29 s
-[2020-01-16 16:49:00] INFO: http://mirror.dc02.hackingand.coffee/arch/               1059.29 KiB/s     0.13 s
-[2020-01-16 16:49:00] INFO: http://mirror.sergal.org/archlinux/                      1782.66 KiB/s     0.08 s
-[2020-01-16 16:49:00] INFO: https://mirror.sergal.org/archlinux/                     1759.99 KiB/s     0.08 s
-[2020-01-16 16:49:00] INFO: https://mirror.csclub.uwaterloo.ca/archlinux/             529.54 KiB/s     0.26 s
-[2020-01-16 16:49:00] INFO: https://mirror.oldsql.cc/archlinux/                       671.65 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: http://mirror.ubrco.de/archlinux/                         446.72 KiB/s     0.30 s
-[2020-01-16 16:49:00] INFO: http://archlinux.mirror.ba/                               346.56 KiB/s     0.39 s
-[2020-01-16 16:49:00] INFO: http://mirrors.lug.mtu.edu/archlinux/                    1124.63 KiB/s     0.12 s
-[2020-01-16 16:49:00] INFO: https://mirror.ubrco.de/archlinux/                        666.60 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: http://mirror.one.com/archlinux/                          380.58 KiB/s     0.35 s
-[2020-01-16 16:49:00] INFO: https://mirror.one.com/archlinux/                         414.02 KiB/s     0.33 s
-[2020-01-16 16:49:00] INFO: https://mirrors.lug.mtu.edu/archlinux/                   1201.23 KiB/s     0.11 s
-[2020-01-16 16:49:00] INFO: http://mirror.orbit-os.com/archlinux/                     444.22 KiB/s     0.30 s
-[2020-01-16 16:49:00] INFO: https://mirror.orbit-os.com/archlinux/                    668.68 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: http://repo.ialab.dsu.edu/archlinux/                      833.57 KiB/s     0.16 s
-[2020-01-16 16:49:00] INFO: http://mirror.fsmg.org.nz/archlinux/                      205.57 KiB/s     0.66 s
-[2020-01-16 16:49:00] INFO: https://mirror.fsmg.org.nz/archlinux/                     203.92 KiB/s     0.66 s
-[2020-01-16 16:49:00] INFO: http://archlinux.mirror.liquidtelecom.com/                194.99 KiB/s     0.69 s
-[2020-01-16 16:49:00] INFO: https://mirrors.eric.ovh/arch/                            681.45 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: https://archlinux.mirror.liquidtelecom.com/               290.21 KiB/s     0.47 s
-[2020-01-16 16:49:00] INFO: https://archlinux.mivzakim.net/                           440.11 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: http://mirror.neuf.no/archlinux/                          381.72 KiB/s     0.35 s
-[2020-01-16 16:49:00] INFO: https://mirror.neuf.no/archlinux/                         564.53 KiB/s     0.24 s
-[2020-01-16 16:49:00] INFO: http://mirror.wtnet.de/arch/                              417.16 KiB/s     0.32 s
-[2020-01-16 16:49:00] INFO: http://mirrors.cqu.edu.cn/archlinux/                      182.81 KiB/s     0.74 s
-[2020-01-16 16:49:00] INFO: http://mirror.smith.geek.nz/archlinux/                      0.00 KiB/s     0.00 s
-[2020-01-16 16:49:00] INFO: https://mirror.smith.geek.nz/archlinux/                     0.00 KiB/s     0.00 s
-[2020-01-16 16:49:00] INFO: https://mirrors.cqu.edu.cn/archlinux/                     272.99 KiB/s     0.49 s
-[2020-01-16 16:49:00] INFO: https://mirror.wtnet.de/arch/                             670.07 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: http://mirrors.nxthost.com/archlinux/                     363.03 KiB/s     0.37 s
-[2020-01-16 16:49:00] INFO: http://archlinux.honkgong.info/                           439.97 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: https://mirrors.nxthost.com/archlinux/                    541.54 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: http://ftp.fau.de/archlinux/                              443.72 KiB/s     0.30 s
-[2020-01-16 16:49:00] INFO: http://mirror.xeonbd.com/archlinux/                       161.92 KiB/s     0.83 s
-[2020-01-16 16:49:00] INFO: https://ftp.fau.de/archlinux/                             438.36 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: http://mirrors.nic.cz/archlinux/                          426.26 KiB/s     0.32 s
-[2020-01-16 16:49:00] INFO: http://mirror.23media.com/archlinux/                      460.74 KiB/s     0.29 s
-[2020-01-16 16:49:00] INFO: https://mirror.23media.com/archlinux/                     686.54 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: http://mirrors.m247.ro/archlinux/                         222.62 KiB/s     0.61 s
-[2020-01-16 16:49:00] INFO: http://mirror.ufscar.br/archlinux/                        292.95 KiB/s     0.46 s
-[2020-01-16 16:49:00] INFO: http://iad.mirrors.misaka.one/archlinux/                 3071.37 KiB/s     0.04 s
-[2020-01-16 16:49:00] INFO: https://iad.mirrors.misaka.one/archlinux/                4978.64 KiB/s     0.03 s
-[2020-01-16 16:49:00] INFO: http://mirror.veriteknik.net.tr/archlinux/                325.19 KiB/s     0.42 s
-[2020-01-16 16:49:00] INFO: http://mirrors.celianvdb.fr/archlinux/                    500.40 KiB/s     0.27 s
-[2020-01-16 16:49:00] INFO: http://mirror.rise.ph/archlinux/                          191.68 KiB/s     0.70 s
-[2020-01-16 16:49:00] INFO: https://mirrors.celianvdb.fr/archlinux/                   745.27 KiB/s     0.18 s
-[2020-01-16 16:49:00] INFO: https://mirrors.dotsrc.org/archlinux/                     409.13 KiB/s     0.33 s
-[2020-01-16 16:49:00] INFO: https://shadow.ind.ntou.edu.tw/archlinux/                 359.71 KiB/s     0.38 s
-[2020-01-16 16:49:00] INFO: http://nova.quantum-mirror.hu/mirrors/pub/archlinux/      377.30 KiB/s     0.36 s
-[2020-01-16 16:49:00] INFO: http://quantum-mirror.hu/mirrors/pub/archlinux/           376.32 KiB/s     0.36 s
-[2020-01-16 16:49:00] INFO: http://arch.petarmaric.com/                               380.17 KiB/s     0.36 s
-[2020-01-16 16:49:00] INFO: http://super.quantum-mirror.hu/mirrors/pub/archlinux/     384.55 KiB/s     0.35 s
-[2020-01-16 16:49:00] INFO: http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/          391.25 KiB/s     0.35 s
-[2020-01-16 16:49:00] INFO: http://reflector.luehm.com/arch/                          828.35 KiB/s     0.16 s
-[2020-01-16 16:49:00] INFO: https://quantum-mirror.hu/mirrors/pub/archlinux/          174.80 KiB/s     0.77 s
-[2020-01-16 16:49:00] INFO: https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/         590.60 KiB/s     0.23 s
-[2020-01-16 16:49:00] INFO: https://reflector.luehm.com/arch/                         820.86 KiB/s     0.16 s
-[2020-01-16 16:49:00] INFO: https://mirror.cloroformo.org/archlinux/                  363.32 KiB/s     0.37 s
-[2020-01-16 16:49:00] INFO: http://archlinux.ip-connect.vn.ua/                        346.32 KiB/s     0.39 s
-[2020-01-16 16:49:00] INFO: http://archlinux.mirror.pcextreme.nl/                     488.66 KiB/s     0.28 s
-[2020-01-16 16:49:00] INFO: http://ftp.acc.umu.se/mirror/archlinux/                   311.86 KiB/s     0.43 s
-[2020-01-16 16:49:00] INFO: http://ftpmirror.infania.net/mirror/archlinux/            349.71 KiB/s     0.39 s
-[2020-01-16 16:49:00] INFO: https://ftp.acc.umu.se/mirror/archlinux/                  349.19 KiB/s     0.39 s
-[2020-01-16 16:49:00] INFO: http://mirror.mikrogravitation.org/archlinux/             393.90 KiB/s     0.34 s
-[2020-01-16 16:49:00] INFO: http://mirrors.ukfast.co.uk/sites/archlinux.org/          349.95 KiB/s     0.39 s
-[2020-01-16 16:49:00] INFO: https://mirror.mikrogravitation.org/archlinux/            563.95 KiB/s     0.24 s
-[2020-01-16 16:49:00] INFO: https://mirror.netcologne.de/archlinux/                   675.18 KiB/s     0.20 s
-[2020-01-16 16:49:00] INFO: https://mirror.thekinrar.fr/archlinux/                    653.94 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://mirror.bytemark.co.uk/archlinux/                  494.15 KiB/s     0.27 s
-[2020-01-16 16:49:00] INFO: http://tux.rainside.sk/archlinux/                         408.86 KiB/s     0.33 s
-[2020-01-16 16:49:00] INFO: https://ftp.spline.inf.fu-berlin.de/mirrors/archlinux/    411.36 KiB/s     0.33 s
-[2020-01-16 16:49:00] INFO: http://mirror.cedille.club/archlinux/                     622.80 KiB/s     0.22 s
-[2020-01-16 16:49:00] INFO: http://mirror.digitalnova.at/archlinux/                   300.81 KiB/s     0.45 s
-[2020-01-16 16:49:00] INFO: https://mirror.ps.kz/archlinux/                           192.19 KiB/s     0.70 s
-[2020-01-16 16:49:00] INFO: http://mirrors.pidginhost.com/arch/                       353.92 KiB/s     0.38 s
-[2020-01-16 16:49:00] INFO: https://mirrors.pidginhost.com/arch/                      536.77 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: https://arch.eckner.net/archlinux/                        624.74 KiB/s     0.22 s
-[2020-01-16 16:49:00] INFO: http://arch.eckner.net/archlinux/                         626.11 KiB/s     0.22 s
-[2020-01-16 16:49:00] INFO: http://ftp.icm.edu.pl/pub/Linux/dist/archlinux/           240.47 KiB/s     0.56 s
-[2020-01-16 16:49:00] INFO: https://mirror.srv.fail/archlinux/                        543.32 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: http://mirror.puzzle.ch/archlinux/                        428.33 KiB/s     0.32 s
-[2020-01-16 16:49:00] INFO: https://mirror.yandex.ru/archlinux/                       494.99 KiB/s     0.27 s
-[2020-01-16 16:49:00] INFO: https://ftp.icm.edu.pl/pub/Linux/dist/archlinux/          224.23 KiB/s     0.60 s
-[2020-01-16 16:49:00] INFO: http://iad.mirror.rackspace.com/archlinux/               1769.25 KiB/s     0.08 s
-[2020-01-16 16:49:00] INFO: http://dfw.mirror.rackspace.com/archlinux/                748.10 KiB/s     0.18 s
-[2020-01-16 16:49:00] INFO: https://mirror.puzzle.ch/archlinux/                       426.74 KiB/s     0.32 s
-[2020-01-16 16:49:00] INFO: http://ord.mirror.rackspace.com/archlinux/                795.97 KiB/s     0.17 s
-[2020-01-16 16:49:00] INFO: https://dfw.mirror.rackspace.com/archlinux/               736.49 KiB/s     0.18 s
-[2020-01-16 16:49:00] INFO: https://iad.mirror.rackspace.com/archlinux/              1683.57 KiB/s     0.08 s
-[2020-01-16 16:49:00] INFO: http://mirror.rackspace.com/archlinux/                   2102.12 KiB/s     0.06 s
-[2020-01-16 16:49:00] INFO: https://mirror.rackspace.com/archlinux/                  1720.50 KiB/s     0.08 s
-[2020-01-16 16:49:00] INFO: https://ord.mirror.rackspace.com/archlinux/               804.33 KiB/s     0.17 s
-[2020-01-16 16:49:00] INFO: http://lon.mirror.rackspace.com/archlinux/                302.29 KiB/s     0.45 s
-[2020-01-16 16:49:00] INFO: http://hkg.mirror.rackspace.com/archlinux/                112.94 KiB/s     1.20 s
-[2020-01-16 16:49:00] INFO: http://mirror.mirohost.net/archlinux/                     361.18 KiB/s     0.37 s
-[2020-01-16 16:49:00] INFO: https://hkg.mirror.rackspace.com/archlinux/               134.08 KiB/s     1.01 s
-[2020-01-16 16:49:00] INFO: http://syd.mirror.rackspace.com/archlinux/                113.03 KiB/s     1.20 s
-[2020-01-16 16:49:00] INFO: https://mirror.mirohost.net/archlinux/                    539.67 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: https://dist-mirror.fem.tu-ilmenau.de/archlinux/          649.07 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://syd.mirror.rackspace.com/archlinux/               111.89 KiB/s     1.21 s
-[2020-01-16 16:49:00] INFO: http://mirrors.manchester.m247.com/arch-linux/            478.12 KiB/s     0.28 s
-[2020-01-16 16:49:00] INFO: http://arch.midov.pl/arch/                                378.08 KiB/s     0.36 s
-[2020-01-16 16:49:00] INFO: http://mirror.premi.st/archlinux/                         237.10 KiB/s     0.57 s
-[2020-01-16 16:49:00] INFO: http://archimonde.ts.si/archlinux/                        395.02 KiB/s     0.34 s
-[2020-01-16 16:49:00] INFO: https://archimonde.ts.si/archlinux/                       589.80 KiB/s     0.23 s
-[2020-01-16 16:49:00] INFO: https://arch.unixpeople.org/                              445.92 KiB/s     0.30 s
-[2020-01-16 16:49:00] INFO: http://mirror.reisenbauer.ee/archlinux/                   410.25 KiB/s     0.33 s
-[2020-01-16 16:49:00] INFO: http://mirror.xtom.com.hk/archlinux/                      192.35 KiB/s     0.70 s
-[2020-01-16 16:49:00] INFO: https://mirror.reisenbauer.ee/archlinux/                  595.78 KiB/s     0.23 s
-[2020-01-16 16:49:00] INFO: http://mirrors.xtom.com/archlinux/                        632.87 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://mirror.xtom.com.hk/archlinux/                     243.45 KiB/s     0.55 s
-[2020-01-16 16:49:00] INFO: https://mirrors.xtom.com/archlinux/                       633.08 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: http://mirrors.cat.net/archlinux/                         189.44 KiB/s     0.71 s
-[2020-01-16 16:49:00] INFO: https://mirrors.rit.edu/archlinux/                       1583.37 KiB/s     0.09 s
-[2020-01-16 16:49:00] INFO: http://mirror.lzu.edu.cn/archlinux/                         0.00 KiB/s     0.00 s
-[2020-01-16 16:49:00] INFO: https://mirrors.cat.net/archlinux/                        245.29 KiB/s     0.55 s
-[2020-01-16 16:49:00] INFO: http://mirrors.ocf.berkeley.edu/archlinux/                518.91 KiB/s     0.26 s
-[2020-01-16 16:49:00] INFO: http://mirror.arizona.edu/archlinux/                      627.14 KiB/s     0.22 s
-[2020-01-16 16:49:00] INFO: https://mirrors.ocf.berkeley.edu/archlinux/               584.71 KiB/s     0.23 s
-[2020-01-16 16:49:00] INFO: https://mirror.arizona.edu/archlinux/                     640.82 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: http://mirror.united-gameserver.de/archlinux/             470.32 KiB/s     0.29 s
-[2020-01-16 16:49:00] INFO: http://ftp.swin.edu.au/archlinux/                         181.29 KiB/s     0.75 s
-[2020-01-16 16:49:00] INFO: http://mirror.system.is/arch/                             361.55 KiB/s     0.37 s
-[2020-01-16 16:49:00] INFO: http://mirrors.acm.wpi.edu/archlinux/                     895.51 KiB/s     0.15 s
-[2020-01-16 16:49:00] INFO: https://mirror.system.is/arch/                            540.34 KiB/s     0.25 s
-[2020-01-16 16:49:00] INFO: http://ftp.tsukuba.wide.ad.jp/Linux/archlinux/            139.03 KiB/s     0.97 s
-[2020-01-16 16:49:00] INFO: http://mirror.cs.pitt.edu/archlinux/                     1164.60 KiB/s     0.12 s
-[2020-01-16 16:49:00] INFO: https://ftp.jaist.ac.jp/pub/Linux/ArchLinux/              163.45 KiB/s     0.83 s
-[2020-01-16 16:49:00] INFO: https://mirror.gnomus.de/                                 437.59 KiB/s     0.31 s
-[2020-01-16 16:49:00] INFO: http://archlinux.iskon.hr/                                377.26 KiB/s     0.36 s
-[2020-01-16 16:49:00] INFO: https://mirror.metalgamer.eu/archlinux/                   656.70 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: http://mirror.neostrada.nl/archlinux/                     481.25 KiB/s     0.28 s
-[2020-01-16 16:49:00] INFO: http://mirror.t-home.mk/archlinux/                        331.59 KiB/s     0.41 s
-[2020-01-16 16:49:00] INFO: http://mirror.metalgamer.eu/archlinux/                    658.26 KiB/s     0.21 s
-[2020-01-16 16:49:00] INFO: https://mirror.t-home.mk/archlinux/                       489.53 KiB/s     0.28 s
-[2020-01-16 16:49:00] INFO: https://mirror.neostrada.nl/archlinux/                    479.81 KiB/s     0.28 s
-[2020-01-16 16:49:00] INFO: http://mirrors.xtom.nl/archlinux/                         408.59 KiB/s     0.33 s
-[2020-01-16 16:49:00] INFO: https://mirrors.xtom.nl/archlinux/                        512.98 KiB/s     0.26 s
-[2020-01-16 16:49:00] INFO: http://mirror.ufro.cl/archlinux/                          312.90 KiB/s     0.43 s
-[2020-01-16 16:49:00] INFO: https://mirror.wormhole.eu/archlinux/                     721.22 KiB/s     0.19 s
+[2020-01-23 16:49:10] INFO: rating https://archlinux.mailtunnel.eu/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.uk.mirror.allworldit.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://archlinux.uk.mirror.allworldit.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.chaoticum.net/arch/
+[2020-01-23 16:49:10] INFO: rating https://mirror.chaoticum.net/arch/
+[2020-01-23 16:49:10] INFO: rating https://ftp.halifax.rwth-aachen.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.neusoft.edu.cn/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.neusoft.edu.cn/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://arch.mirror.constant.com/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.atviras.lt/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.pseudoform.org/
+[2020-01-23 16:49:10] INFO: rating https://mirror.pseudoform.org/
+[2020-01-23 16:49:10] INFO: rating http://mirror.lty.me/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://ger.mirror.pkgbuild.com/
+[2020-01-23 16:49:10] INFO: rating https://ind.mirror.pkgbuild.com/
+[2020-01-23 16:49:10] INFO: rating https://jpn.mirror.pkgbuild.com/
+[2020-01-23 16:49:10] INFO: rating https://sgp.mirror.pkgbuild.com/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.uni-plovdiv.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.uni-plovdiv.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.mailtunnel.eu/
+[2020-01-23 16:49:10] INFO: rating http://mirror.f4st.host/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.f4st.host/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://ftp.sh.cvut.cz/arch/
+[2020-01-23 16:49:10] INFO: rating https://ftp.sh.cvut.cz/arch/
+[2020-01-23 16:49:10] INFO: rating http://ftp.nluug.nl/os/Linux/distr/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.n-ix.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://arch.mirror.constant.com/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.atviras.lt/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.dc02.hackingand.coffee/arch/
+[2020-01-23 16:49:10] INFO: rating https://mirror.dc02.hackingand.coffee/arch/
+[2020-01-23 16:49:10] INFO: rating https://mirror.lty.me/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.cyberbits.eu/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.cyberbits.eu/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.za.mirror.allworldit.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://archlinux.za.mirror.allworldit.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.dynamict.se/
+[2020-01-23 16:49:10] INFO: rating https://archlinux.dynamict.se/
+[2020-01-23 16:49:10] INFO: rating http://mirror.ubrco.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.ubrco.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.sergal.org/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.sergal.org/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://arch.mirror.far.fi/
+[2020-01-23 16:49:10] INFO: rating https://mirror.osbeck.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://reflector.luehm.com/arch/
+[2020-01-23 16:49:10] INFO: rating https://reflector.luehm.com/arch/
+[2020-01-23 16:49:10] INFO: rating http://mirror.csclub.uwaterloo.ca/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.csclub.uwaterloo.ca/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://arch.jensgutermuth.de/
+[2020-01-23 16:49:10] INFO: rating https://arch.jensgutermuth.de/
+[2020-01-23 16:49:10] INFO: rating http://packages.oth-regensburg.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://packages.oth-regensburg.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.dkm.cz/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.orbit-os.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.orbit-os.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.honkgong.info/
+[2020-01-23 16:49:10] INFO: rating https://mirror.bethselamin.de/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.lug.mtu.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.lug.mtu.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.niyawe.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.niyawe.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://archlinux.beccacervello.it/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://ftp.myrveln.se/pub/linux/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.rol.ru/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.internode.on.net/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.mikrogravitation.org/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.mikrogravitation.org/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.thekinrar.fr/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://dist-mirror.fem.tu-ilmenau.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://ftp.yzu.edu.tw/Linux/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.yandex.ru/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.srv.fail/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://ftp.tku.edu.tw/Linux/ArchLinux/
+[2020-01-23 16:49:10] INFO: rating http://dfw.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://hkg.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://iad.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://lon.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://ord.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://dfw.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://hkg.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://iad.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://lon.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://ord.mirror.rackspace.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.tuna.tsinghua.edu.cn/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.neuf.no/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.neuf.no/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.scd31.com/arch/
+[2020-01-23 16:49:10] INFO: rating https://mirror.scd31.com/arch/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.cqu.edu.cn/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.cqu.edu.cn/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.thaller.ws/
+[2020-01-23 16:49:10] INFO: rating https://archlinux.thaller.ws/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.manchester.m247.com/arch-linux/
+[2020-01-23 16:49:10] INFO: rating http://arch.midov.pl/arch/
+[2020-01-23 16:49:10] INFO: rating http://mirror.reisenbauer.ee/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.reisenbauer.ee/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.xtom.com.hk/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.xtom.com.hk/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror-hk.koddos.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror-hk.koddos.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.cat.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.cat.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.xtom.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.xtom.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.rit.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.rit.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.advancedhosters.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.ocf.berkeley.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.ocf.berkeley.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.sonic.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.sonic.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.arizona.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.arizona.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.mia11.us.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.mia11.us.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.puzzle.ch/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.puzzle.ch/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.ams1.nl.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.dal10.us.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.fra10.de.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.sfo12.us.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.wdc1.us.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.ams1.nl.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.dal10.us.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.fra10.de.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.sfo12.us.leaseweb.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.acm.wpi.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.gnomus.de/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.iskon.hr/
+[2020-01-23 16:49:10] INFO: rating http://pkg.adfinis-sygroup.ch/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://pkg.adfinis-sygroup.ch/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://arch.mirror.square-r00t.net/
+[2020-01-23 16:49:10] INFO: rating https://arch.mirror.square-r00t.net/
+[2020-01-23 16:49:10] INFO: rating http://mirror.mirohost.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.mirohost.net/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://gluttony.sin.cvut.cz/arch/
+[2020-01-23 16:49:10] INFO: rating https://gluttony.sin.cvut.cz/arch/
+[2020-01-23 16:49:10] INFO: rating http://archmirror.hbit.sztaki.hu/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.selfnet.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.selfnet.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.rezopole.net/
+[2020-01-23 16:49:10] INFO: rating http://br.mirror.archlinux-br.org/
+[2020-01-23 16:49:10] INFO: rating http://za.mirror.archlinux-br.org/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.mirror.ba/
+[2020-01-23 16:49:10] INFO: rating http://ftp.fau.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://ftp.fau.de/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.tuna.tsinghua.edu.cn/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.zju.edu.cn/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.smith.geek.nz/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.smith.geek.nz/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.fsmg.org.nz/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.fsmg.org.nz/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.mirror.liquidtelecom.com/
+[2020-01-23 16:49:10] INFO: rating https://archlinux.mirror.liquidtelecom.com/
+[2020-01-23 16:49:10] INFO: rating http://mirror.wtnet.de/arch/
+[2020-01-23 16:49:10] INFO: rating https://mirror.wtnet.de/arch/
+[2020-01-23 16:49:10] INFO: rating https://archlinux.mivzakim.net/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.nic.cz/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.kaminski.io/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.kaminski.io/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.xeonbd.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archmirror.lavatech.top/
+[2020-01-23 16:49:10] INFO: rating https://archmirror.lavatech.top/
+[2020-01-23 16:49:10] INFO: rating http://repo.ialab.dsu.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://repo.ialab.dsu.edu/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.nxthost.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.nxthost.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.23media.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.23media.com/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.m247.ro/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.ims.nksc.lt/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.ims.nksc.lt/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://www.caco.ic.unicamp.br/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://www.caco.ic.unicamp.br/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://archlinux.mirror.pcextreme.nl/
+[2020-01-23 16:49:10] INFO: rating http://mirror.veriteknik.net.tr/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://shadow.ind.ntou.edu.tw/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.rise.ph/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://arch-mirror.cloud.louifox.house/
+[2020-01-23 16:49:10] INFO: rating http://mirrors.dotsrc.org/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirrors.dotsrc.org/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://nova.quantum-mirror.hu/mirrors/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://quantum-mirror.hu/mirrors/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://nova.quantum-mirror.hu/mirrors/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://quantum-mirror.hu/mirrors/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://super.quantum-mirror.hu/mirrors/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://super.quantum-mirror.hu/mirrors/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://arch.petarmaric.com/
+[2020-01-23 16:49:10] INFO: rating http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://glua.ua.pt/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://glua.ua.pt/pub/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.cloroformo.org/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://mirror.oldsql.cc/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://mirror.oldsql.cc/archlinux/
+[2020-01-23 16:49:10] INFO: rating http://ftpmirror.infania.net/mirror/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://download.nus.edu.sg/mirror/archlinux/
+[2020-01-23 16:49:10] INFO: rating https://www.mirrorservice.org/sites/ftp.archlinux.org/
+[2020-01-23 16:49:10] INFO: rating http://www.mirrorservice.org/sites/ftp.archlinux.org/
+[2020-01-23 16:49:44] INFO: Server                                                            Rate       Time
+[2020-01-23 16:49:44] INFO: http://archlinux.uk.mirror.allworldit.com/archlinux/      471.14 KiB/s     0.29 s
+[2020-01-23 16:49:44] INFO: http://mirror.chaoticum.net/arch/                         437.02 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://mirror.chaoticum.net/arch/                        435.21 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://archlinux.uk.mirror.allworldit.com/archlinux/     699.22 KiB/s     0.19 s
+[2020-01-23 16:49:44] INFO: https://archlinux.mailtunnel.eu/                          692.63 KiB/s     0.19 s
+[2020-01-23 16:49:44] INFO: https://arch.mirror.constant.com/                        2497.63 KiB/s     0.05 s
+[2020-01-23 16:49:44] INFO: https://ftp.halifax.rwth-aachen.de/archlinux/             655.55 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: https://mirrors.atviras.lt/archlinux/                     371.11 KiB/s     0.36 s
+[2020-01-23 16:49:44] INFO: http://mirrors.neusoft.edu.cn/archlinux/                  160.07 KiB/s     0.84 s
+[2020-01-23 16:49:44] INFO: http://mirror.lty.me/archlinux/                           631.36 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://mirror.pseudoform.org/                             538.63 KiB/s     0.25 s
+[2020-01-23 16:49:44] INFO: https://mirror.pseudoform.org/                            541.22 KiB/s     0.25 s
+[2020-01-23 16:49:44] INFO: https://mirrors.neusoft.edu.cn/archlinux/                 201.05 KiB/s     0.67 s
+[2020-01-23 16:49:44] INFO: https://ger.mirror.pkgbuild.com/                          684.55 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://mirrors.uni-plovdiv.net/archlinux/                 329.58 KiB/s     0.41 s
+[2020-01-23 16:49:44] INFO: https://jpn.mirror.pkgbuild.com/                          442.36 KiB/s     0.30 s
+[2020-01-23 16:49:44] INFO: http://archlinux.mailtunnel.eu/                           478.39 KiB/s     0.28 s
+[2020-01-23 16:49:44] INFO: https://mirrors.uni-plovdiv.net/archlinux/                491.72 KiB/s     0.27 s
+[2020-01-23 16:49:44] INFO: https://sgp.mirror.pkgbuild.com/                          278.70 KiB/s     0.48 s
+[2020-01-23 16:49:44] INFO: https://ind.mirror.pkgbuild.com/                          268.20 KiB/s     0.50 s
+[2020-01-23 16:49:44] INFO: http://mirror.f4st.host/archlinux/                        437.52 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://mirror.f4st.host/archlinux/                       650.50 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://arch.mirror.constant.com/                         1968.39 KiB/s     0.07 s
+[2020-01-23 16:49:44] INFO: http://ftp.nluug.nl/os/Linux/distr/archlinux/             291.24 KiB/s     0.46 s
+[2020-01-23 16:49:44] INFO: http://ftp.sh.cvut.cz/arch/                               414.24 KiB/s     0.33 s
+[2020-01-23 16:49:44] INFO: https://mirrors.n-ix.net/archlinux/                       680.30 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://mirror.dc02.hackingand.coffee/arch/               1110.04 KiB/s     0.12 s
+[2020-01-23 16:49:44] INFO: https://ftp.sh.cvut.cz/arch/                              628.60 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: https://mirror.dc02.hackingand.coffee/arch/               853.05 KiB/s     0.16 s
+[2020-01-23 16:49:44] INFO: http://mirrors.atviras.lt/archlinux/                      371.99 KiB/s     0.36 s
+[2020-01-23 16:49:44] INFO: https://mirror.lty.me/archlinux/                          939.78 KiB/s     0.14 s
+[2020-01-23 16:49:44] INFO: http://mirror.cyberbits.eu/archlinux/                     496.98 KiB/s     0.27 s
+[2020-01-23 16:49:44] INFO: https://mirror.cyberbits.eu/archlinux/                    725.82 KiB/s     0.19 s
+[2020-01-23 16:49:44] INFO: http://archlinux.dynamict.se/                             368.83 KiB/s     0.37 s
+[2020-01-23 16:49:44] INFO: http://mirror.ubrco.de/archlinux/                         440.25 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://archlinux.dynamict.se/                            526.07 KiB/s     0.26 s
+[2020-01-23 16:49:44] INFO: http://mirror.sergal.org/archlinux/                      1730.98 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: http://archlinux.za.mirror.allworldit.com/archlinux/      161.28 KiB/s     0.83 s
+[2020-01-23 16:49:44] INFO: https://mirror.sergal.org/archlinux/                     1684.25 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: http://reflector.luehm.com/arch/                            0.00 KiB/s     0.00 s
+[2020-01-23 16:49:44] INFO: https://mirror.osbeck.com/archlinux/                     5141.45 KiB/s     0.03 s
+[2020-01-23 16:49:44] INFO: https://reflector.luehm.com/arch/                           0.00 KiB/s     0.00 s
+[2020-01-23 16:49:44] INFO: https://mirror.ubrco.de/archlinux/                        659.72 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://mirror.csclub.uwaterloo.ca/archlinux/              726.24 KiB/s     0.19 s
+[2020-01-23 16:49:44] INFO: https://archlinux.za.mirror.allworldit.com/archlinux/     245.61 KiB/s     0.55 s
+[2020-01-23 16:49:44] INFO: https://mirror.csclub.uwaterloo.ca/archlinux/            1768.76 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: http://arch.jensgutermuth.de/                             440.54 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://arch.jensgutermuth.de/                            662.25 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://arch.mirror.far.fi/                                157.65 KiB/s     0.85 s
+[2020-01-23 16:49:44] INFO: http://packages.oth-regensburg.de/archlinux/              428.41 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://packages.oth-regensburg.de/archlinux/             642.61 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://mirror.orbit-os.com/archlinux/                     440.85 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: http://archlinux.honkgong.info/                           436.87 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: http://mirrors.lug.mtu.edu/archlinux/                    1091.56 KiB/s     0.12 s
+[2020-01-23 16:49:44] INFO: https://mirror.dkm.cz/archlinux/                          574.63 KiB/s     0.23 s
+[2020-01-23 16:49:44] INFO: https://mirror.orbit-os.com/archlinux/                    647.29 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: https://mirrors.lug.mtu.edu/archlinux/                    894.98 KiB/s     0.15 s
+[2020-01-23 16:49:44] INFO: https://mirror.bethselamin.de/                            659.43 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://mirrors.niyawe.de/archlinux/                       361.48 KiB/s     0.37 s
+[2020-01-23 16:49:44] INFO: https://mirrors.niyawe.de/archlinux/                      399.01 KiB/s     0.34 s
+[2020-01-23 16:49:44] INFO: https://archlinux.beccacervello.it/archlinux/             491.61 KiB/s     0.27 s
+[2020-01-23 16:49:44] INFO: http://ftp.myrveln.se/pub/linux/archlinux/                357.50 KiB/s     0.38 s
+[2020-01-23 16:49:44] INFO: http://mirror.mikrogravitation.org/archlinux/             390.80 KiB/s     0.34 s
+[2020-01-23 16:49:44] INFO: https://mirror.mikrogravitation.org/archlinux/            596.78 KiB/s     0.23 s
+[2020-01-23 16:49:44] INFO: https://mirror.thekinrar.fr/archlinux/                    650.42 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: https://mirror.rol.ru/archlinux/                          322.43 KiB/s     0.42 s
+[2020-01-23 16:49:44] INFO: https://dist-mirror.fem.tu-ilmenau.de/archlinux/          642.63 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: https://mirror.srv.fail/archlinux/                        520.29 KiB/s     0.26 s
+[2020-01-23 16:49:44] INFO: https://mirror.yandex.ru/archlinux/                       476.32 KiB/s     0.28 s
+[2020-01-23 16:49:44] INFO: http://mirror.internode.on.net/pub/archlinux/              68.93 KiB/s     1.95 s
+[2020-01-23 16:49:44] INFO: http://iad.mirror.rackspace.com/archlinux/               1700.61 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: http://ftp.tku.edu.tw/Linux/ArchLinux/                    226.50 KiB/s     0.59 s
+[2020-01-23 16:49:44] INFO: http://dfw.mirror.rackspace.com/archlinux/                716.44 KiB/s     0.19 s
+[2020-01-23 16:49:44] INFO: http://mirror.rackspace.com/archlinux/                   1696.53 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: http://ord.mirror.rackspace.com/archlinux/                937.06 KiB/s     0.14 s
+[2020-01-23 16:49:44] INFO: http://lon.mirror.rackspace.com/archlinux/                247.01 KiB/s     0.55 s
+[2020-01-23 16:49:44] INFO: https://dfw.mirror.rackspace.com/archlinux/               722.59 KiB/s     0.19 s
+[2020-01-23 16:49:44] INFO: https://iad.mirror.rackspace.com/archlinux/              1952.38 KiB/s     0.07 s
+[2020-01-23 16:49:44] INFO: http://hkg.mirror.rackspace.com/archlinux/                135.43 KiB/s     0.99 s
+[2020-01-23 16:49:44] INFO: https://mirror.rackspace.com/archlinux/                  1663.98 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: https://ord.mirror.rackspace.com/archlinux/               781.33 KiB/s     0.17 s
+[2020-01-23 16:49:44] INFO: http://ftp.yzu.edu.tw/Linux/archlinux/                     65.00 KiB/s     2.07 s
+[2020-01-23 16:49:44] INFO: https://lon.mirror.rackspace.com/archlinux/               297.65 KiB/s     0.45 s
+[2020-01-23 16:49:44] INFO: http://mirror.neuf.no/archlinux/                          379.39 KiB/s     0.35 s
+[2020-01-23 16:49:44] INFO: http://mirror.scd31.com/arch/                             986.39 KiB/s     0.14 s
+[2020-01-23 16:49:44] INFO: https://mirror.neuf.no/archlinux/                         569.12 KiB/s     0.24 s
+[2020-01-23 16:49:44] INFO: https://mirror.scd31.com/arch/                            922.42 KiB/s     0.15 s
+[2020-01-23 16:49:44] INFO: http://mirrors.tuna.tsinghua.edu.cn/archlinux/            156.65 KiB/s     0.86 s
+[2020-01-23 16:49:44] INFO: https://hkg.mirror.rackspace.com/archlinux/               113.15 KiB/s     1.19 s
+[2020-01-23 16:49:44] INFO: http://archlinux.thaller.ws/                              262.74 KiB/s     0.51 s
+[2020-01-23 16:49:44] INFO: http://mirrors.manchester.m247.com/arch-linux/            482.07 KiB/s     0.28 s
+[2020-01-23 16:49:44] INFO: http://mirrors.cqu.edu.cn/archlinux/                      187.60 KiB/s     0.72 s
+[2020-01-23 16:49:44] INFO: https://archlinux.thaller.ws/                             261.32 KiB/s     0.52 s
+[2020-01-23 16:49:44] INFO: http://arch.midov.pl/arch/                                374.80 KiB/s     0.36 s
+[2020-01-23 16:49:44] INFO: https://mirrors.cqu.edu.cn/archlinux/                     279.39 KiB/s     0.48 s
+[2020-01-23 16:49:44] INFO: http://mirror.xtom.com.hk/archlinux/                      192.88 KiB/s     0.70 s
+[2020-01-23 16:49:44] INFO: http://mirror.reisenbauer.ee/archlinux/                   396.90 KiB/s     0.34 s
+[2020-01-23 16:49:44] INFO: https://mirror.reisenbauer.ee/archlinux/                  591.37 KiB/s     0.23 s
+[2020-01-23 16:49:44] INFO: http://mirror-hk.koddos.net/archlinux/                    225.64 KiB/s     0.60 s
+[2020-01-23 16:49:44] INFO: https://mirror.xtom.com.hk/archlinux/                     249.89 KiB/s     0.54 s
+[2020-01-23 16:49:44] INFO: http://mirrors.xtom.com/archlinux/                        625.68 KiB/s     0.22 s
+[2020-01-23 16:49:44] INFO: http://mirrors.rit.edu/archlinux/                        1228.96 KiB/s     0.11 s
+[2020-01-23 16:49:44] INFO: https://mirrors.xtom.com/archlinux/                       627.19 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: https://mirrors.rit.edu/archlinux/                       1548.64 KiB/s     0.09 s
+[2020-01-23 16:49:44] INFO: http://mirrors.advancedhosters.com/archlinux/            3009.08 KiB/s     0.04 s
+[2020-01-23 16:49:44] INFO: http://mirrors.cat.net/archlinux/                         191.43 KiB/s     0.70 s
+[2020-01-23 16:49:44] INFO: https://mirror-hk.koddos.net/archlinux/                   169.48 KiB/s     0.79 s
+[2020-01-23 16:49:44] INFO: http://mirrors.ocf.berkeley.edu/archlinux/                512.49 KiB/s     0.26 s
+[2020-01-23 16:49:44] INFO: https://mirrors.cat.net/archlinux/                        249.17 KiB/s     0.54 s
+[2020-01-23 16:49:44] INFO: https://mirrors.ocf.berkeley.edu/archlinux/               595.12 KiB/s     0.23 s
+[2020-01-23 16:49:44] INFO: http://mirrors.sonic.net/archlinux/                       650.84 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://mirror.mia11.us.leaseweb.net/archlinux/           1738.47 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: http://mirror.arizona.edu/archlinux/                      622.41 KiB/s     0.22 s
+[2020-01-23 16:49:44] INFO: https://mirror.mia11.us.leaseweb.net/archlinux/          1746.52 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: https://mirrors.sonic.net/archlinux/                      646.68 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: https://mirror.arizona.edu/archlinux/                     637.55 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://mirror.dal10.us.leaseweb.net/archlinux/           1132.76 KiB/s     0.12 s
+[2020-01-23 16:49:44] INFO: http://mirror.puzzle.ch/archlinux/                        424.11 KiB/s     0.32 s
+[2020-01-23 16:49:44] INFO: http://mirror.ams1.nl.leaseweb.net/archlinux/             460.49 KiB/s     0.29 s
+[2020-01-23 16:49:44] INFO: http://mirror.wdc1.us.leaseweb.net/archlinux/            3391.40 KiB/s     0.04 s
+[2020-01-23 16:49:44] INFO: http://mirror.sfo12.us.leaseweb.net/archlinux/            572.84 KiB/s     0.24 s
+[2020-01-23 16:49:44] INFO: https://mirror.puzzle.ch/archlinux/                       423.15 KiB/s     0.32 s
+[2020-01-23 16:49:44] INFO: http://mirror.fra10.de.leaseweb.net/archlinux/            328.12 KiB/s     0.41 s
+[2020-01-23 16:49:44] INFO: https://mirror.dal10.us.leaseweb.net/archlinux/          1700.14 KiB/s     0.08 s
+[2020-01-23 16:49:44] INFO: http://mirrors.acm.wpi.edu/archlinux/                     887.27 KiB/s     0.15 s
+[2020-01-23 16:49:44] INFO: https://mirror.ams1.nl.leaseweb.net/archlinux/            682.74 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: https://mirror.sfo12.us.leaseweb.net/archlinux/           851.19 KiB/s     0.16 s
+[2020-01-23 16:49:44] INFO: https://mirror.fra10.de.leaseweb.net/archlinux/           632.46 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://arch.mirror.square-r00t.net/                      2220.16 KiB/s     0.06 s
+[2020-01-23 16:49:44] INFO: https://arch.mirror.square-r00t.net/                     3219.08 KiB/s     0.04 s
+[2020-01-23 16:49:44] INFO: https://mirror.gnomus.de/                                 434.84 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: http://archlinux.iskon.hr/                                371.59 KiB/s     0.36 s
+[2020-01-23 16:49:44] INFO: http://pkg.adfinis-sygroup.ch/archlinux/                  413.33 KiB/s     0.33 s
+[2020-01-23 16:49:44] INFO: https://pkg.adfinis-sygroup.ch/archlinux/                 615.33 KiB/s     0.22 s
+[2020-01-23 16:49:44] INFO: http://mirror.mirohost.net/archlinux/                     358.37 KiB/s     0.38 s
+[2020-01-23 16:49:44] INFO: http://gluttony.sin.cvut.cz/arch/                         405.26 KiB/s     0.33 s
+[2020-01-23 16:49:44] INFO: https://mirror.mirohost.net/archlinux/                    534.61 KiB/s     0.25 s
+[2020-01-23 16:49:44] INFO: https://gluttony.sin.cvut.cz/arch/                        627.28 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://mirror.selfnet.de/archlinux/                       438.04 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: http://archmirror.hbit.sztaki.hu/archlinux/               238.05 KiB/s     0.57 s
+[2020-01-23 16:49:44] INFO: https://mirror.selfnet.de/archlinux/                      652.90 KiB/s     0.21 s
+[2020-01-23 16:49:44] INFO: http://archlinux.rezopole.net/                            468.45 KiB/s     0.29 s
+[2020-01-23 16:49:44] INFO: http://br.mirror.archlinux-br.org/                        367.55 KiB/s     0.37 s
+[2020-01-23 16:49:44] INFO: http://archlinux.mirror.ba/                               362.63 KiB/s     0.37 s
+[2020-01-23 16:49:44] INFO: http://ftp.fau.de/archlinux/                              440.32 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://ftp.fau.de/archlinux/                             436.17 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: http://za.mirror.archlinux-br.org/                        174.93 KiB/s     0.77 s
+[2020-01-23 16:49:44] INFO: https://mirrors.tuna.tsinghua.edu.cn/archlinux/           199.97 KiB/s     0.67 s
+[2020-01-23 16:49:44] INFO: http://mirror.smith.geek.nz/archlinux/                    184.53 KiB/s     0.73 s
+[2020-01-23 16:49:44] INFO: http://mirror.fsmg.org.nz/archlinux/                      204.98 KiB/s     0.66 s
+[2020-01-23 16:49:44] INFO: https://mirror.smith.geek.nz/archlinux/                   270.11 KiB/s     0.50 s
+[2020-01-23 16:49:44] INFO: http://mirror.wtnet.de/arch/                              412.60 KiB/s     0.33 s
+[2020-01-23 16:49:44] INFO: http://archlinux.mirror.liquidtelecom.com/                192.16 KiB/s     0.70 s
+[2020-01-23 16:49:44] INFO: https://mirror.fsmg.org.nz/archlinux/                     203.01 KiB/s     0.66 s
+[2020-01-23 16:49:44] INFO: https://mirror.wtnet.de/arch/                             664.55 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://mirrors.nic.cz/archlinux/                          414.21 KiB/s     0.33 s
+[2020-01-23 16:49:44] INFO: http://mirror.kaminski.io/archlinux/                     1526.64 KiB/s     0.09 s
+[2020-01-23 16:49:44] INFO: https://archlinux.mirror.liquidtelecom.com/               287.71 KiB/s     0.47 s
+[2020-01-23 16:49:44] INFO: https://archlinux.mivzakim.net/                           441.57 KiB/s     0.30 s
+[2020-01-23 16:49:44] INFO: https://mirror.kaminski.io/archlinux/                    2209.33 KiB/s     0.06 s
+[2020-01-23 16:49:44] INFO: http://repo.ialab.dsu.edu/archlinux/                      817.25 KiB/s     0.16 s
+[2020-01-23 16:49:44] INFO: http://archmirror.lavatech.top/                           435.65 KiB/s     0.31 s
+[2020-01-23 16:49:44] INFO: https://repo.ialab.dsu.edu/archlinux/                     896.77 KiB/s     0.15 s
+[2020-01-23 16:49:44] INFO: https://archmirror.lavatech.top/                          673.11 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://mirrors.nxthost.com/archlinux/                     359.84 KiB/s     0.37 s
+[2020-01-23 16:49:44] INFO: http://mirror.xeonbd.com/archlinux/                       165.55 KiB/s     0.81 s
+[2020-01-23 16:49:44] INFO: http://mirror.23media.com/archlinux/                      457.98 KiB/s     0.29 s
+[2020-01-23 16:49:44] INFO: https://mirrors.nxthost.com/archlinux/                    537.79 KiB/s     0.25 s
+[2020-01-23 16:49:44] INFO: https://mirror.23media.com/archlinux/                     685.22 KiB/s     0.20 s
+[2020-01-23 16:49:44] INFO: http://mirrors.ims.nksc.lt/archlinux/                     335.65 KiB/s     0.40 s
+[2020-01-23 16:49:44] INFO: http://mirrors.m247.ro/archlinux/                         220.56 KiB/s     0.61 s
+[2020-01-23 16:49:44] INFO: https://mirrors.ims.nksc.lt/archlinux/                    507.43 KiB/s     0.27 s
+[2020-01-23 16:49:44] INFO: https://www.caco.ic.unicamp.br/archlinux/                 555.29 KiB/s     0.24 s
+[2020-01-23 16:49:44] INFO: http://www.caco.ic.unicamp.br/archlinux/                  374.37 KiB/s     0.36 s
+[2020-01-23 16:49:44] INFO: http://archlinux.mirror.pcextreme.nl/                     485.55 KiB/s     0.28 s
+[2020-01-23 16:49:44] INFO: http://mirrors.zju.edu.cn/archlinux/                      179.35 KiB/s     0.75 s
+[2020-01-23 16:49:44] INFO: http://mirror.veriteknik.net.tr/archlinux/                321.00 KiB/s     0.42 s
+[2020-01-23 16:49:44] INFO: https://arch-mirror.cloud.louifox.house/                  742.48 KiB/s     0.18 s
+[2020-01-23 16:49:44] INFO: http://mirrors.dotsrc.org/archlinux/                      339.11 KiB/s     0.40 s
+[2020-01-23 16:49:44] INFO: http://mirror.rise.ph/archlinux/                          196.00 KiB/s     0.69 s
+[2020-01-23 16:49:44] INFO: https://mirrors.dotsrc.org/archlinux/                     492.95 KiB/s     0.27 s
+[2020-01-23 16:49:44] INFO: http://nova.quantum-mirror.hu/mirrors/pub/archlinux/      382.63 KiB/s     0.35 s
+[2020-01-23 16:49:44] INFO: http://quantum-mirror.hu/mirrors/pub/archlinux/           382.88 KiB/s     0.35 s
+[2020-01-23 16:49:44] INFO: https://shadow.ind.ntou.edu.tw/archlinux/                 353.69 KiB/s     0.38 s
+[2020-01-23 16:49:44] INFO: https://nova.quantum-mirror.hu/mirrors/pub/archlinux/     567.12 KiB/s     0.24 s
+[2020-01-23 16:49:44] INFO: http://arch.petarmaric.com/                               373.69 KiB/s     0.36 s
+[2020-01-23 16:49:44] INFO: http://super.quantum-mirror.hu/mirrors/pub/archlinux/     381.41 KiB/s     0.35 s
+[2020-01-23 16:49:44] INFO: https://super.quantum-mirror.hu/mirrors/pub/archlinux/    566.98 KiB/s     0.24 s
+[2020-01-23 16:49:44] INFO: http://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/          389.40 KiB/s     0.35 s
+[2020-01-23 16:49:44] INFO: https://ftp.rnl.tecnico.ulisboa.pt/pub/archlinux/         579.74 KiB/s     0.23 s
+[2020-01-23 16:49:44] INFO: http://glua.ua.pt/pub/archlinux/                          371.88 KiB/s     0.36 s
+[2020-01-23 16:49:44] INFO: https://quantum-mirror.hu/mirrors/pub/archlinux/          127.11 KiB/s     1.06 s
+[2020-01-23 16:49:44] INFO: https://glua.ua.pt/pub/archlinux/                         556.77 KiB/s     0.24 s
+[2020-01-23 16:49:44] INFO: https://mirror.cloroformo.org/archlinux/                  359.36 KiB/s     0.37 s
+[2020-01-23 16:49:44] INFO: http://mirror.oldsql.cc/archlinux/                        476.71 KiB/s     0.28 s
+[2020-01-23 16:49:44] INFO: https://mirror.oldsql.cc/archlinux/                       693.59 KiB/s     0.19 s
+[2020-01-23 16:49:44] INFO: http://ftpmirror.infania.net/mirror/archlinux/            346.68 KiB/s     0.39 s
+[2020-01-23 16:49:44] INFO: http://www.mirrorservice.org/sites/ftp.archlinux.org/     500.28 KiB/s     0.27 s
+[2020-01-23 16:49:44] INFO: https://www.mirrorservice.org/sites/ftp.archlinux.org/    498.50 KiB/s     0.27 s
+[2020-01-23 16:49:44] INFO: https://download.nus.edu.sg/mirror/archlinux/             306.53 KiB/s     0.44 s
 
 # setup package building stuff
 groupadd builders
@@ -941,13 +947,13 @@ Optional dependencies for vim
 Running in chroot, ignoring request: daemon-reload
 (2/2) Arming ConditionNeedsUpdate...
 sudo rm "${TMPDIR}"/root-bind/bin/setup-tasks.sh
-+sudo rm /var/tmp/genbootstrap.voo8XY/root-bind/bin/setup-tasks.sh
++sudo rm /var/tmp/genbootstrap.5jEeRT/root-bind/bin/setup-tasks.sh
 sudo umount "${TMPDIR}"/root-bind
-+sudo umount /var/tmp/genbootstrap.voo8XY/root-bind
++sudo umount /var/tmp/genbootstrap.5jEeRT/root-bind
 
 #sudo sh -c "(cd ${TMPDIR}/root; bsdtar -cf - * | pigz -9 > ${TMPDIR}/root.tar.gz)"
 #mv "${TMPDIR}/root.tar.gz" "${CURDIR}/root.tar.gz"
 #sudo rm -rf "${TMPDIR}"
 echo ${TMPDIR} > TMPDIR
-+echo /var/tmp/genbootstrap.voo8XY
++echo /var/tmp/genbootstrap.5jEeRT
 
